@@ -51,9 +51,10 @@ SRCS_B		:= \
 			linked_list/ft_lstsize.c 				\
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
+SRCS_B		:= $(SRCS_B:%=$(SRC_DIR)/%)
 BUILD_DIR	:= .build
 OBJS		:= $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
-OBJS_B		:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJS_B		:= $(SRCS_B:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 DEPS		:= $(OBJS:.o=.d)
 
 CC			:= gcc
@@ -69,12 +70,12 @@ DIR_DUP		= mkdir -p $(@D)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 	$(info CREATED $(NAME))
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-	$(DIR_DUP)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	@$(DIR_DUP)
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 	$(info CREATED $@)
 
 -include $(DEPS)
@@ -86,11 +87,10 @@ fclean: clean
 	@$(RM) $(NAME)
 
 re:
-	$(MAKE) fclean
-	$(MAKE) all
+	@$(MAKE) fclean
+	@$(MAKE) all
 
-bonus:
-	@make SRCS="$(SRCS) $(SRCS_B)"
+bonus: $(OBJS_B)
+	@$(AR) $(ARFLAGS) $(NAME) $(OBJS_B)
 
 .PHONY: all clean fclean re bonus
-.SILENT:
