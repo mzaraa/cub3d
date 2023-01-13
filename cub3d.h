@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:43:51 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/11 17:02:52 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/13 10:47:15 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_data
 {
 	t_elements	*id_tab;
 	int			state;
+	int			present;
 }	t_data;
 
 		/* Libft functions */

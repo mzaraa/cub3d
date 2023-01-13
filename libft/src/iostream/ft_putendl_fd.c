@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 12:43:36 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/13 10:13:22 by mzaraa           ###   ########.fr       */
+/*   Created: 2021/10/30 15:19:06 by mzaraa            #+#    #+#             */
+/*   Updated: 2021/10/30 16:36:00 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	ft_putendl_fd(char *s, int fd)
 {
-	t_data	*data;
+	int	i;
 
-	data = malloc(sizeof(t_data));
-	data->state = INIT;
-	if (ac != 2 || !check_file_name(av[1]))
+	i = 0;
+	if (s)
 	{
-		printf("Error in arguments\n");
-		return (0);
+		while (s[i])
+		{
+			write(fd, &s[i], 1);
+			i++;
+		}
+		write(fd, "\n", 1);
 	}
-	parser(data, av[1]);
-	return (0);
 }

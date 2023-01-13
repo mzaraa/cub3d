@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 12:43:36 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/13 10:13:22 by mzaraa           ###   ########.fr       */
+/*   Created: 2021/11/03 13:41:03 by mzaraa            #+#    #+#             */
+/*   Updated: 2021/11/13 13:52:02 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+/*
+Alloue et renvoie un nouvel élément. la variable content est initialisée à 
+l’aide de la valeur du paramètre content. 
+La variable ’next’ est initialisée à NULL.
+*/
+t_list	*ft_lstnew(void *content)
 {
-	t_data	*data;
+	t_list	*ptr_fresh;
 
-	data = malloc(sizeof(t_data));
-	data->state = INIT;
-	if (ac != 2 || !check_file_name(av[1]))
-	{
-		printf("Error in arguments\n");
-		return (0);
-	}
-	parser(data, av[1]);
-	return (0);
+	ptr_fresh = malloc(sizeof(t_list));
+	if (!ptr_fresh)
+		return (NULL);
+	ptr_fresh->content = content;
+	ptr_fresh->next = NULL;
+	return (ptr_fresh);
 }

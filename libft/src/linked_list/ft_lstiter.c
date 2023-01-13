@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 12:43:36 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/13 10:13:22 by mzaraa           ###   ########.fr       */
+/*   Created: 2021/11/04 16:16:16 by mzaraa            #+#    #+#             */
+/*   Updated: 2021/11/04 16:21:04 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	t_data	*data;
-
-	data = malloc(sizeof(t_data));
-	data->state = INIT;
-	if (ac != 2 || !check_file_name(av[1]))
+	while (lst)
 	{
-		printf("Error in arguments\n");
-		return (0);
+		f(lst->content);
+		lst = lst->next;
 	}
-	parser(data, av[1]);
-	return (0);
 }

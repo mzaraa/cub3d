@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 12:43:36 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/13 10:13:22 by mzaraa           ###   ########.fr       */
+/*   Created: 2021/10/20 09:46:29 by mzaraa            #+#    #+#             */
+/*   Updated: 2021/10/26 10:51:32 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+size_t	ft_strlen(const char *str)
 {
-	t_data	*data;
+	int	i;
 
-	data = malloc(sizeof(t_data));
-	data->state = INIT;
-	if (ac != 2 || !check_file_name(av[1]))
-	{
-		printf("Error in arguments\n");
-		return (0);
-	}
-	parser(data, av[1]);
-	return (0);
+	i = 0;
+	while (*str++)
+		i++;
+	return (i);
 }
+
+// #include <stdio.h>
+// int	main()
+// {
+// 	char tab[]= "salut";
+// 	printf("strlen = %d", ft_strlen(tab));
+// 	return (0);
+// }

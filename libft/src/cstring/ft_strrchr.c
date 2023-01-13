@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 12:43:36 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/13 10:13:22 by mzaraa           ###   ########.fr       */
+/*   Created: 2021/10/23 18:40:53 by mzaraa            #+#    #+#             */
+/*   Updated: 2021/11/01 17:35:26 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+char	*ft_strrchr(const char *s, int c)
 {
-	t_data	*data;
+	int		i;
+	char	*chr;
 
-	data = malloc(sizeof(t_data));
-	data->state = INIT;
-	if (ac != 2 || !check_file_name(av[1]))
+	i = 0;
+	chr = 0;
+	while (s[i])
 	{
-		printf("Error in arguments\n");
-		return (0);
+		if (s[i] == (char)c)
+			chr = (char *)(s + i);
+		i++;
 	}
-	parser(data, av[1]);
-	return (0);
+	if (s[i] == (char)c)
+		chr = (char *)(s + i);
+	return (chr);
 }

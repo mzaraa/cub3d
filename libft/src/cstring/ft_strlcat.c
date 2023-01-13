@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 12:43:36 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/13 10:13:22 by mzaraa           ###   ########.fr       */
+/*   Created: 2021/10/20 09:46:22 by mzaraa            #+#    #+#             */
+/*   Updated: 2021/10/26 15:50:02 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 {
-	t_data	*data;
+	size_t	i;
+	size_t	j;
+	size_t	len_dst;
+	size_t	len_src;
 
-	data = malloc(sizeof(t_data));
-	data->state = INIT;
-	if (ac != 2 || !check_file_name(av[1]))
-	{
-		printf("Error in arguments\n");
+	len_dst = ft_strlen(dst);
+	len_src = ft_strlen(src);
+	i = len_dst;
+	j = 0;
+	if (!dst && !src)
 		return (0);
-	}
-	parser(data, av[1]);
-	return (0);
+	if (dstsize <= len_dst)
+		return (dstsize + len_src);
+	while (src[j] != '\0' && i + 1 < dstsize)
+		dst[i++] = src[j++];
+	dst[i] = '\0';
+	return (len_dst + len_src);
 }
