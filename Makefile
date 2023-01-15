@@ -1,66 +1,67 @@
-# Project: cub3d
+# Project: cub3D
+NAME	:= cub3D
 
-NAME		:= icecream
+LIBS		:= ft
+LIBS_TARGET :=	\
+	lib/libft/libft.a		\
 
-#------------------------------------------------#
-#					INGREDIENTS
-#------------------------------------------------#
-# SRCS		source files
-# OBJS		object files
-#
-# CC		compiler
-# CFLAGS	compiler flags
-# CPPFLAGS	preprocessor flags
+INCS		:= \
+	include					\
+	lib/libft/include		\
 
-SRCS		:= test.c
-OBJS		:= test.o
+SRC_DIR		:= src
+SRCS		:=	\
+	core/main.c				\
+	core/ft_exit_program.c	\
+	parser/parser.c			\
+	parser/check_args.c		\
+
+SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
+BUILD_DIR	:= .build
+OBJS		:= $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+DEPS		:= $(OBJS:.o=.d)
 
 CC			:= clang
 CFLAGS		:= -Wall -Wextra -Werror
-CPPFLAGS	:= -I.
-
-#------------------------------------------------#
-#					UTENSILS
-#------------------------------------------------#
-# RM		force remove
-# MAKEFLAGS	make flags
-
+CPPFLAGS	:= $(addprefix -I,$(INCS)) -MMD -MP
+LDFLAGS		:= $(addprefix -L,$(dir $(LIBS_TARGET)))
+LDLIBS		:= $(addprefix -l,$(LIBS))
 
 RM			:= rm -f
-MAKEFLAGS	+= 
+MAKEFLAGS	+= --silent --no-print-directory
+DIR_DUP		= mkdir -p $(@D)
 
-#------------------------------------------------#
-#					RECIPES
-#------------------------------------------------#
-# all		default goal
-# $(NAME)	linking .o -> binary
-# clean		remove .o
-# fclean	remove .o + binary
-# re		remake default goal
+all: libft $(NAME) 
 
-all: $(NAME)
+libft:
+	@$(MAKE) -C lib/libft
 
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) -o $(NAME)
+$(NAME): $(OBJS) $(LIBS_TARGET)
+	@$(CC) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $(NAME)
 	$(info CREATED $(NAME))
 
-%.o: %.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
+	@$(DIR_DUP)
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 	$(info CREATED $@)
 
+-include $(DEPS)
+
 clean:
-	$(RM) $(OBJS)
+	@for f in $(dir $(LIBS_TARGET)); do $(MAKE) -C $$f clean; done
+	@$(RM) $(OBJS) $(DEPS)
 
 fclean: clean
-	$(RM) $(NAME)
+	@for f in $(dir $(LIBS_TARGET)); do $(MAKE) -C $$f fclean; done
+	@$(RM) $(NAME)
 
 re:
-	$(MAKE) fclean
-	$(MAKE) all
+	@$(MAKE) fclean
+	@$(MAKE) all
 
-#------------------------------------------------#
-#					SPEC
-#------------------------------------------------#
+git:
+	git add .
+	git commit -m "auto update cub3D"
+	git push
 
-.PHONY: clean fclean re
-.SILENT:
+.PHONY: all clean fclean re libft
