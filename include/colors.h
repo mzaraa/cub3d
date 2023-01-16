@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_args.c                                       :+:      :+:    :+:   */
+/*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 12:44:07 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/16 10:16:18 by mzaraa           ###   ########.fr       */
+/*   Created: 2023/01/16 10:56:59 by mzaraa            #+#    #+#             */
+/*   Updated: 2023/01/16 11:05:01 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef COLORS_H
+# define COLORS_H
 
-/*
-** Check if the file_name is valid => filename + .cub
-*/
+	/****************** Colors ******************/
 
-int	check_file_name(char *file_name)
-{
-	int	i;
+# define RST  "\x1B[0m"
+# define KRED  "\x1B[31m"
+# define KGRN  "\x1B[32m"
+# define KYEL  "\x1B[33m"
+# define KBLU  "\x1B[34m"
+# define KMAG  "\x1B[35m"
+# define KCYN  "\x1B[36m"
+# define KWHT  "\x1B[37m"
 
-	i = 0;
-	while (file_name[i])
-		i++;
-	if (ft_strcmp(file_name + i - 4, ".cub") == 0)
-		return (1);
-	return (0);
-}
+#endif // COLORS

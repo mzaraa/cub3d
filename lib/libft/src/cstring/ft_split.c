@@ -6,91 +6,87 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 14:46:32 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/14 12:39:02 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/16 12:19:30 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//compte le nombre de mots que j'aurai dans mon tableau final.
-static int	ft_words_count(char const *s, char c)
+int	ischarset(char const c, char const *charset)
 {
-	int	nbr_of_words;
+	while (*charset)
+	{
+		if (c == *charset)
+			return (1);
+		++charset;
+	}
+	return (0);
+}
+
+int	ft_strlen_s(char const *s, char const *charset)
+{
 	int	i;
 
 	i = 0;
-	nbr_of_words = 0;
-	while (s[i])
-	{
-		while (s[i] == c)
-			i++;
-		if (s[i] != '\0')
-			nbr_of_words++;
-		while (s[i] && (s[i] != c))
-			i++;
-	}
-	return (nbr_of_words);
+	while (*s && !ischarset(*s++, charset))
+		++i;
+	return (i);
 }
 
-//Copie le contenu de la source dans ma destination
-char	*ft_strncpy(char *dst, const char *src, size_t n)
+int	nb_word(char const *s, char const *charset)
 {
-	size_t		i;
+	int	count;
 
-	i = 0;
-	while (i < n && src[i])
+	count = 0;
+	while (*s)
 	{
-		dst[i] = src[i];
-		i++;
+		if (!ischarset(*s, charset))
+		{
+			count++;
+			while (*s && !ischarset(*s, charset))
+				++s;
+		}
+		else
+			++s;
 	}
-	while (i < n)
-	{
-		dst[i] = '\0';
-		i++;
-	}
-	return (dst);
+	return (count);
 }
 
-//Renvoie une nouvelle chaîne de caractères qui est dupliquée (avec stncpy)
-// * depuis ma string avec un maximum de n caractères.
-static char	*ft_strndup(const char *s, size_t n)
+char	*ft_cpy(char const *s, char const *charset)
 {
 	char	*str;
+	char	*strcpy;
 
-	str = (char *)malloc(n + 1);
-	if (!str)
-		return (NULL);
-	str = ft_strncpy(str, s, n);
-	str[n] = '\0';
-	return (str);
+	str = malloc(sizeof(char) * (ft_strlen_s(s, charset) + 1));
+	strcpy = str;
+	while (*s && !ischarset(*s, charset))
+		*str++ = *s++;
+	*str = '\0';
+	return (strcpy);
 }
 
-// malloc l'espace suffisant pour accueillir 
-// * les chaines de caractères fraichement separés.
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char const *charset)
 {
-	int		i;
-	int		j;
-	int		fresh;
 	char	**str;
+	char	**strcpy;
 
-	if (!s)
+	if (!s || !charset)
 		return (NULL);
-	str = (char **)malloc(sizeof(char *) * (ft_words_count(s, c)) + 1);
+	str = malloc(sizeof(char *) * (nb_word(s, charset) + 1));
 	if (!str)
-		return ((NULL));
-	i = 0;
-	fresh = 0;
-	while (s[i])
+		return (NULL);
+	strcpy = str;
+	while (*s)
 	{
-		while (s[i] == c)
-			i++;
-		j = i;
-		while (s[i] && s[i] != c)
-			i++;
-		if (i > j)
-			str[fresh++] = ft_strndup(s + j, i - j);
+		if (!ischarset(*s, charset))
+		{
+			*str++ = ft_cpy(s, charset);
+			while (*s && !ischarset(*s, charset))
+				++s;
+		}
+		else
+			++s;
 	}
-	str[fresh] = 0;
-	return (str);
+	*str = 0;
+	return (strcpy);
 }

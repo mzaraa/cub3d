@@ -15,6 +15,12 @@ SRCS		:=	\
 	core/ft_exit_program.c	\
 	parser/parser.c			\
 	parser/check_args.c		\
+	parser/check_double.c \
+	parser/check_file_line.c \
+	parser/parse_identifier.c \
+	parser/parse_rgb.c \
+	parser/parse_texture.c \
+	utils/usefull_func.c \
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 BUILD_DIR	:= .build

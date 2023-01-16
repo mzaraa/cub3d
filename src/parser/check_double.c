@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_double.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 12:43:36 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/16 12:22:00 by mzaraa           ###   ########.fr       */
+/*   Created: 2023/01/16 13:43:02 by mzaraa            #+#    #+#             */
+/*   Updated: 2023/01/16 14:11:02 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_data(t_data *data)
+/*
+** Check if the identifier has already been parsed
+*/
+void	check_double(t_data *data, size_t id, char *line)
 {
-	ft_memset(data, 0, sizeof(t_data));
-	data->state = INIT;
-	data->all_id_present = 63;
-}
-
-int	main(int ac, char **av)
-{
-	t_data	*data;
-
-	if (ac != 2 || !check_file_name(av[1]))
+	if (data->present_id & (1 << id))
 	{
-		printf("%sError%s: Usage => ./cub3D <filename> + .cub\n", KRED, RST);
-		exit (EXIT_FAILURE);
+		if (*line)
+			free(line);
+		perror("Error: Double identifier");
+		ft_exit_program(data);
 	}
-	data = malloc(sizeof(t_data));
-	init_data(data);
-	parser(data, av[1]);
-	return (0);
+	data->present_id |= (1 << id);
 }
