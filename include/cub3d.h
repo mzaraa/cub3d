@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:43:51 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/16 17:15:03 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/17 17:51:01 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_elements
 {
 	char	*id;
 	union {
-		char	*info_texture;
+		char	*info_tex;
 		char	**info_rgb;
 	};
 }	t_elements;
@@ -85,6 +85,8 @@ typedef struct s_data
 	size_t			present_id;
 	size_t			all_id_present;
 	unsigned int	flag_error;
+	char			**map;
+	t_list			*map_list;
 }	t_data;
 
 		/* Parser file name */
@@ -92,11 +94,15 @@ int		check_file_name(char *file_name);
 
 		/* Parser file content */
 void	parser(t_data *data, char *file_name);
-void	parse_identifier(t_data *data, int fd);
-int		check_line(t_data *data, char *line);
+int		parse_identifier(t_data *data, int fd);
+void	check_line(t_data *data, char *line);
 void	check_double(t_data *data, size_t id, char *line);
 char	**parse_rgb(t_data *data, char *line);
-char	*parse_texture(t_data *data, char *line);
+char	*parse_tex(t_data *data, char *line);
+
+		/* Parse map */
+void	parse_map(t_data *data, int fd);
+void	fill_map(t_data *data);
 
 		/* Utils */
 void	ft_exit_program(t_data *data);

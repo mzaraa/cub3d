@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_double.c                                     :+:      :+:    :+:   */
+/*   fill_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/16 13:43:02 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/17 18:29:54 by mzaraa           ###   ########.fr       */
+/*   Created: 2023/01/17 16:45:57 by mzaraa            #+#    #+#             */
+/*   Updated: 2023/01/17 16:58:38 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/*
-** Check if the identifier has already been parsed
-*/
-void	check_double(t_data *data, size_t id, char *line)
+void	fill_map(t_data *data)
 {
-	if (data->present_id & (1 << id))
+	t_list	*tmp;
+	int		i;
+
+	tmp = data->map_list;
+	i = ft_lstsize(data->map_list);
+	data->map = (char **)malloc(sizeof(char *) * (i + 1));
+	if (data->map == NULL)
 	{
-		if (*line)
-			free(line);
-		perror("Error: Double identifier");
+		perror("Error: Malloc failed");
 		ft_exit_program(data);
 	}
-	data->present_id |= (1 << id);
+	i = 0;
+	while (tmp)
+	{
+		data->map[i] = ft_strdup(tmp->content);
+		tmp = tmp->next;
+		i--;
+	}
+	data->map[i] = NULL;
+	ft_lstclear(&data->map_list, free);
 }

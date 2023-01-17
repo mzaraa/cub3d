@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 14:46:13 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/14 12:39:02 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/17 13:58:46 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,9 @@ char	*ft_strtrim(char const	*s1, char const *set)
 	char	*str;
 	int		front;
 	int		rear;
-	int		i;
 
 	front = 0;
 	rear = 0;
-	i = 0;
 	if (!s1)
 		return (0);
 	while (ft_inset(s1[front], set))

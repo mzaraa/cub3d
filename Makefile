@@ -20,6 +20,8 @@ SRCS		:=	\
 	parser/parse_identifier.c \
 	parser/parse_rgb.c \
 	parser/parse_texture.c \
+	parser/parse_map.c \
+	initialization/fill_map.c \
 	utils/usefull_func.c \
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)

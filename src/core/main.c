@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:43:36 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/16 12:22:00 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/17 18:26:53 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	init_data(t_data *data)
 {
 	ft_memset(data, 0, sizeof(t_data));
+	data->id_tab = malloc(sizeof(t_elements) * TOTAL);
+	ft_memset(data->id_tab, 0, sizeof(t_elements) * TOTAL);
 	data->state = INIT;
 	data->all_id_present = 63;
 }
@@ -31,5 +33,13 @@ int	main(int ac, char **av)
 	data = malloc(sizeof(t_data));
 	init_data(data);
 	parser(data, av[1]);
+
+	int i = 0;
+	while (data->map[i])
+	{
+		printf("%s\n", data->map[i]);
+		i++;
+	}
+
 	return (0);
 }

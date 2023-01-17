@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:11:39 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/16 17:03:55 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/17 18:27:36 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ int	check_rgb_value(t_data *data, char **rgb)
 		while (rgb[i][j])
 		{
 			if (!ft_isdigit(rgb[i][j]))
+			{
 				return (1);
+			}
 			j++;
 		}
 		i++;
@@ -48,7 +50,7 @@ char	**parse_rgb(t_data *data, char *line)
 
 	i = 0;
 	j = 0;
-	rgb = ft_split(line + 1, ", ");
+	rgb = ft_split(line + 1, ", \n\t");
 	if (rgb == NULL || ft_split_len(rgb) != 3)
 		data->flag_error = 1;
 	if (data->flag_error || check_rgb_value(data, rgb))
@@ -58,5 +60,6 @@ char	**parse_rgb(t_data *data, char *line)
 		free(line);
 		ft_exit_program(data);
 	}
+	printf("Function: parse_rgb\n");
 	return (rgb);
 }
