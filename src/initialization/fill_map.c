@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:45:57 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/17 16:58:38 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/18 11:49:10 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	fill_map(t_data *data)
 	tmp = data->map_list;
 	i = ft_lstsize(data->map_list);
 	data->map = (char **)malloc(sizeof(char *) * (i + 1));
+	data->map[i] = NULL;
 	if (data->map == NULL)
 	{
 		perror("Error: Malloc failed");
@@ -30,8 +31,7 @@ void	fill_map(t_data *data)
 	{
 		data->map[i] = ft_strdup(tmp->content);
 		tmp = tmp->next;
-		i--;
+		i++;
 	}
-	data->map[i] = NULL;
 	ft_lstclear(&data->map_list, free);
 }

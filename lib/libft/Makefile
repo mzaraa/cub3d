@@ -10,6 +10,7 @@ SRCS		:= \
 			ctype/ft_isascii.c 				\
 			ctype/ft_isdigit.c 				\
 			ctype/ft_isprint.c 				\
+			ctype/ft_isspace.c 				\
 			convert/ft_itoa.c 				\
 			manip_memory/ft_memchr.c 				\
 			manip_memory/ft_memcmp.c 				\

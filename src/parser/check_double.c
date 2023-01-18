@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:43:02 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/17 18:29:54 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/18 18:16:39 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	check_double(t_data *data, size_t id, char *line)
 	{
 		if (*line)
 			free(line);
-		perror("Error: Double identifier");
+		printf("Error\nDouble identifier\n");
 		ft_exit_program(data);
 	}
 	data->present_id |= (1 << id);

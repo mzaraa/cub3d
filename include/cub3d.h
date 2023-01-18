@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:43:51 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/17 17:51:01 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/18 18:51:42 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "libft.h"
 # include "colors.h"
+
+# define WHITESPACE " \t\n\v\f\r"
 /*
 ** Represent the identifier of the elements in the .cub file
 */
@@ -49,6 +51,7 @@ typedef struct s_tuple
 {
 	char				*id_str;
 	enum e_identifier	enum_v;
+	int					i;
 }	t_tuple;
 
 /*
@@ -64,7 +67,7 @@ typedef struct s_elements
 	char	*id;
 	union {
 		char	*info_tex;
-		char	**info_rgb;
+		int		*info_rgb;
 	};
 }	t_elements;
 
@@ -87,6 +90,11 @@ typedef struct s_data
 	unsigned int	flag_error;
 	char			**map;
 	t_list			*map_list;
+	int				map_width;
+	int				map_height;
+	int				player_pos_x;
+	int				player_pos_y;
+	int				player_dir;
 }	t_data;
 
 		/* Parser file name */
@@ -97,11 +105,13 @@ void	parser(t_data *data, char *file_name);
 int		parse_identifier(t_data *data, int fd);
 void	check_line(t_data *data, char *line);
 void	check_double(t_data *data, size_t id, char *line);
-char	**parse_rgb(t_data *data, char *line);
+int		*parse_rgb(t_data *data, char *line);
 char	*parse_tex(t_data *data, char *line);
+int		dodge_empty_line(char *line);
 
 		/* Parse map */
 void	parse_map(t_data *data, int fd);
+void	check_is_good_map(t_data *data);
 void	fill_map(t_data *data);
 
 		/* Utils */

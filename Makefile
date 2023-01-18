@@ -19,6 +19,7 @@ SRCS		:=	\
 	parser/check_file_line.c \
 	parser/parse_identifier.c \
 	parser/parse_rgb.c \
+	parser/dodge_empty_line.c \
 	parser/parse_texture.c \
 	parser/parse_map.c \
 	initialization/fill_map.c \

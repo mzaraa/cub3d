@@ -6,33 +6,41 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:11:39 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/17 18:27:36 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/18 19:10:31 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_rgb_value(t_data *data, char **rgb)
+int	only_digits(char *rgb)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
-	while (rgb[i] && data->flag_error == 0)
+	while (rgb[i])
 	{
-		if (ft_strlen(rgb[i]) > 3)
+		if (ft_isdigit(rgb[i]) == 0)
 			return (1);
-		j = 0;
-		while (rgb[i][j])
-		{
-			if (!ft_isdigit(rgb[i][j]))
-			{
-				return (1);
-			}
-			j++;
-		}
 		i++;
+	}
+	if (i > 3)
+		return (1);
+	if (ft_atoi(rgb) > 255)
+		return (1);
+	return (0);
+}
+
+int	check_rgb_value(char *rgb)
+{
+	char	**rgb_split;
+
+	rgb_split = ft_split(rgb, ",");
+	if (rgb_split == NULL || ft_split_len(rgb_split) != 3
+		|| only_digits(rgb_split[0]) || only_digits(rgb_split[1])
+		|| only_digits(rgb_split[2]))
+	{
+		free(rgb_split);
+		return (1);
 	}
 	return (0);
 }
@@ -42,24 +50,31 @@ int	check_rgb_value(t_data *data, char **rgb)
 **	into an array of strings. Check if the array size is 3 or more and if the 
 **	values are digits. If not, free the array and the line and exit the program.
 */
-char	**parse_rgb(t_data *data, char *line)
+int	*parse_rgb(t_data *data, char *line)
 {
 	int		i;
 	int		j;
 	char	**rgb;
+	char	**rgb_int;
+	int		*ret;
 
 	i = 0;
 	j = 0;
-	rgb = ft_split(line + 1, ", \n\t");
-	if (rgb == NULL || ft_split_len(rgb) != 3)
+	rgb = ft_split(line, " \n\t");
+	if (rgb == NULL || ft_split_len(rgb) != 2)
 		data->flag_error = 1;
-	if (data->flag_error || check_rgb_value(data, rgb))
+	if (data->flag_error || check_rgb_value(rgb[1]))
 	{
 		if (*rgb)
 			free(rgb);
 		free(line);
+		printf("Error\nInvalid rgb value\n");
 		ft_exit_program(data);
 	}
-	printf("Function: parse_rgb\n");
-	return (rgb);
+	rgb_int = ft_split(rgb[1], ",");
+	ret = malloc(sizeof(int) * 3);
+	ret[0] = ft_atoi(rgb_int[0]);
+	ret[1] = ft_atoi(rgb_int[1]);
+	ret[2] = ft_atoi(rgb_int[2]);
+	return (ret);
 }

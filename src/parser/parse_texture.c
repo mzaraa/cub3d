@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:52:19 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/17 18:05:32 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/18 18:16:08 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ char	*parse_tex(t_data *data, char *line)
 	char	**texture_path;
 
 	temp = (line + 2);
-	texture_path = ft_split(temp, " \n\t");
+	texture_path = ft_split(temp, WHITESPACE);
+	// printf("%s\n", *texture_path);
 	if (texture_path == NULL || ft_split_len(texture_path) != 1)
 		data->flag_error = 1;
-	printf("Function: parse_tex \ndata->error: %u\n", data->flag_error);
 	if (data->flag_error || ft_strncmp(*texture_path + \
 		(ft_strlen(*texture_path) - 4), ".xpm", 4) != 0)
 	{
+		printf("Error\nTexture path invalid\n");
 		if (*texture_path)
 			free(texture_path);
 		free(line);
