@@ -33,3 +33,16 @@ void	ft_free_split(char **split)
 		free(split[i++]);
 	free(split);
 }
+
+void ft_replace_char(char* str, char find, char replace)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == find)
+			str[i] = replace;
+		i++;
+	}
+}

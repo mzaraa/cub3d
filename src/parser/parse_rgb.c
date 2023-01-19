@@ -44,6 +44,7 @@ int	check_rgb_value(char *rgb)
 		ft_free_split(rgb_split);
 		return (1);
 	}
+	ft_free_split(rgb_split);
 	return (0);
 }
 
@@ -75,5 +76,6 @@ int	*parse_rgb(t_data *data, char *line)
 	ret[1] = ft_atoi(rgb_int[1]);
 	ret[2] = ft_atoi(rgb_int[2]);
 	ft_free_split(rgb_int);
+	ft_free_split(rgb);
 	return (ret);
 }

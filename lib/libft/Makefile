@@ -49,7 +49,6 @@ SRCS		:= \
 			linked_list/ft_lstnew.c 				\
 			linked_list/ft_lstsize.c 				\
 			iostream/gnl/get_next_line.c 			\
-			iostream/gnl/get_next_line_utils.c 		\
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 BUILD_DIR	:= .build

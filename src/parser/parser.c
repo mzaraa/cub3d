@@ -24,8 +24,9 @@ void	parser(t_data *data, char *file_name)
 	}
 	if (parse_identifier(data, fd))
 	{
-		parse_map(data, fd);
-		//check_is_good_map(data);
+		data->line_gnl = NULL;
+		//parse_row_map(data, fd);
+		//check_map(data);
 		//fill_map(data);
 	}
 	else

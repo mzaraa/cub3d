@@ -34,6 +34,7 @@ void	ft_exit_program(t_data *data)
 	}
 	if (data->map_list)
 		ft_lstclear(&data->map_list, free);
+	ft_free_split(data->map);
 	free(data);
 	// printf("Exiting program");
 	exit(1);

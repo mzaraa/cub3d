@@ -91,6 +91,7 @@ typedef struct s_data
 	char			*line_gnl;
 	char			**map;
 	t_list			*map_list;
+	int				longest_line;
 	int				map_width;
 	int				map_height;
 	int				player_pos_x;
@@ -111,13 +112,14 @@ char	*parse_tex(t_data *data, char *line);
 int		dodge_empty_line(char *line);
 
 		/* Parse map */
-void	parse_map(t_data *data, int fd);
-void	check_is_good_map(t_data *data);
+void	parse_raw_map(t_data *data, int fd);
+void	check_map(t_data *data);
 void	fill_map(t_data *data);
 
 		/* Utils */
 void	ft_exit_program(t_data *data);
 int		ft_split_len(char **split);
 void	ft_free_split(char **split);
+void	ft_replace_char(char* str, char find, char replace);
 
 #endif //CUB3D_H

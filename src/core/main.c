@@ -35,6 +35,7 @@ int	main(int ac, char **av)
 	data = malloc(sizeof(t_data));
 	init_data(data);
 	parser(data, av[1]);
+	ft_exit_program(data);
 	// while (i < 6)
 	// {
 	// 	if (i < 4 && data->id_tab[i].info_tex != NULL)

@@ -14,7 +14,7 @@
 
 char	*gnl(int fd)
 {
-	static int	BUFFER_SIZE = 100;
+	static int	BUFFER_SIZE = 5;
     char		*line;
     int			i;
     char		c;
@@ -26,15 +26,21 @@ char	*gnl(int fd)
         if(i == BUFFER_SIZE-1)
 		{
             BUFFER_SIZE = BUFFER_SIZE * 2;
-            line = my_realloc(line, BUFFER_SIZE);
+            line = ft_realloc(line, BUFFER_SIZE / 2, BUFFER_SIZE);
         }
         line[i] = c;
         i++;
         if (c == '\n')
 		{
             line[i] = '\0';
-            return line;
+            return (line);
         }
     }
+    if(i > 0)
+    {
+        line[i] = '\0';
+        return (line);
+    }
+    free(line);
     return NULL;
 }

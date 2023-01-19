@@ -58,7 +58,7 @@ char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	**ft_split(char const *s, char const *charset);
 void	*ft_memchr(const void *s, int c, size_t n);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
+void	*ft_memcpy(void *dest, const void *src, size_t n, size_t old_size);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 void	*ft_memset(void *s, int c, size_t n);
 void	*ft_calloc(size_t count, size_t size);
@@ -81,6 +81,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 // get_next_line
 char	*gnl(int fd);
-void	*my_realloc(void *ptr, size_t size);
+void	*ft_realloc(void *ptr, size_t old_size, size_t size);
 
 #endif

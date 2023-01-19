@@ -18,6 +18,10 @@ int	dodge_empty_line(char *line)
 
 	trimed = ft_strtrim(line, WHITESPACE);
 	if ((ft_isspace(line[0]) && !*trimed))
+	{
 		return (1);
+	}
+	if(*trimed)
+		free(trimed);
 	return (0);
 }
