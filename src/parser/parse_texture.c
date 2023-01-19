@@ -20,6 +20,7 @@ char	*parse_tex(t_data *data, char *line)
 {
 	char	*temp;
 	char	**texture_path;
+	char 	*texture;
 
 	temp = (line + 2);
 	texture_path = ft_split(temp, WHITESPACE);
@@ -30,10 +31,11 @@ char	*parse_tex(t_data *data, char *line)
 		(ft_strlen(*texture_path) - 4), ".xpm", 4) != 0)
 	{
 		printf("Error\nTexture path invalid\n");
-		if (*texture_path)
-			free(texture_path);
+		ft_free_split(texture_path);
 		free(line);
 		ft_exit_program(data);
 	}
-	return (*texture_path);
+	texture = ft_strdup(*texture_path);
+	ft_free_split(texture_path);
+	return (texture);
 }

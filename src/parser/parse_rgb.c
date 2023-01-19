@@ -33,13 +33,15 @@ int	only_digits(char *rgb)
 int	check_rgb_value(char *rgb)
 {
 	char	**rgb_split;
+//	int i;
 
+//	i = 0;
 	rgb_split = ft_split(rgb, ",");
 	if (rgb_split == NULL || ft_split_len(rgb_split) != 3
 		|| only_digits(rgb_split[0]) || only_digits(rgb_split[1])
 		|| only_digits(rgb_split[2]))
 	{
-		free(rgb_split);
+		ft_free_split(rgb_split);
 		return (1);
 	}
 	return (0);
@@ -52,22 +54,18 @@ int	check_rgb_value(char *rgb)
 */
 int	*parse_rgb(t_data *data, char *line)
 {
-	int		i;
-	int		j;
 	char	**rgb;
 	char	**rgb_int;
 	int		*ret;
 
-	i = 0;
-	j = 0;
 	rgb = ft_split(line, " \n\t");
 	if (rgb == NULL || ft_split_len(rgb) != 2)
 		data->flag_error = 1;
 	if (data->flag_error || check_rgb_value(rgb[1]))
 	{
-		if (*rgb)
-			free(rgb);
+		ft_free_split(rgb);
 		free(line);
+		free(data->line_gnl);
 		printf("Error\nInvalid rgb value\n");
 		ft_exit_program(data);
 	}
@@ -76,5 +74,6 @@ int	*parse_rgb(t_data *data, char *line)
 	ret[0] = ft_atoi(rgb_int[0]);
 	ret[1] = ft_atoi(rgb_int[1]);
 	ret[2] = ft_atoi(rgb_int[2]);
+	ft_free_split(rgb_int);
 	return (ret);
 }

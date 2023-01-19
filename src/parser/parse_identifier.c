@@ -29,24 +29,23 @@ char	*trim_line(t_data *data, char *line)
 
 int	parse_identifier(t_data *data, int fd)
 {
-	char	*line;
 	char	*trimed;
 
-	line = NULL;
+	data->line_gnl = NULL;
 	trimed = NULL;
 	while (data->present_id != data->all_id_present)
 	{
-		line = gnl(fd);
-		if (line == NULL)
+		data->line_gnl = gnl(fd);
+		if (data->line_gnl == NULL)
 			break ;
-		else if (line[0] == '\n')
+		else if (data->line_gnl[0] == '\n')
 		{
-			free (line);
+			free (data->line_gnl);
 			continue ;
 		}
-		trimed = trim_line(data, line);
+		trimed = trim_line(data, data->line_gnl);
 		check_line(data, trimed);
-		free(line);
+		free(data->line_gnl);
 		free(trimed);
 	}
 	if (data->present_id == data->all_id_present)

@@ -22,9 +22,6 @@
 # include <math.h>
 # include <errno.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
 
 typedef struct s_list
 {
@@ -84,6 +81,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 // get_next_line
 char	*gnl(int fd);
-char	*ft_strjoin_gnl(char *save, char *buffer);
+void	*my_realloc(void *ptr, size_t size);
 
 #endif

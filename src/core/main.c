@@ -25,7 +25,7 @@ void	init_data(t_data *data)
 int	main(int ac, char **av)
 {
 	t_data	*data;
-	int i = 0;
+	// int i = 0;
 
 	if (ac != 2 || !check_file_name(av[1]))
 	{
@@ -35,18 +35,18 @@ int	main(int ac, char **av)
 	data = malloc(sizeof(t_data));
 	init_data(data);
 	parser(data, av[1]);
-	while (i < 6)
-	{
-		if (i < 4 && data->id_tab[i].info_tex != NULL)
-			printf("%s\n", data->id_tab[i].info_tex);
-		else if (data->id_tab[i].info_rgb != NULL)
-			printf("%d %d %d\n", data->id_tab[i].info_rgb[0], data->id_tab[i].info_rgb[1], data->id_tab[i].info_rgb[2]);
-		i++;
-	}
-	while (data->map_list)
-	{
-		printf("%s", data->map_list->content);
-		data->map_list = data->map_list->next;
-	}
+	// while (i < 6)
+	// {
+	// 	if (i < 4 && data->id_tab[i].info_tex != NULL)
+	// 		printf("%s\n", data->id_tab[i].info_tex);
+	// 	else if (data->id_tab[i].info_rgb != NULL)
+	// 		printf("%d %d %d\n", data->id_tab[i].info_rgb[0], data->id_tab[i].info_rgb[1], data->id_tab[i].info_rgb[2]);
+	// 	i++;
+	// }
+	// while (data->map_list)
+	// {
+	// 	printf("%s", data->map_list->content);
+	// 	data->map_list = data->map_list->next;
+	// }
 	return (0);
 }

@@ -21,3 +21,15 @@ int	ft_split_len(char **split)
 		i++;
 	return (i);
 }
+
+void	ft_free_split(char **split)
+{
+	int i;
+
+	i = 0;
+	if (split == NULL)
+		return;
+	while (split[i])
+		free(split[i++]);
+	free(split);
+}

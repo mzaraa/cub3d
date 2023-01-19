@@ -17,6 +17,7 @@ SRCS		:= \
 			manip_memory/ft_memcpy.c 				\
 			manip_memory/ft_memmove.c 				\
 			manip_memory/ft_memset.c 				\
+			manip_memory/ft_realloc.c 				\
 			iostream/ft_putchar_fd.c 				\
 			iostream/ft_putendl_fd.c 				\
 			iostream/ft_putnbr_fd.c 				\

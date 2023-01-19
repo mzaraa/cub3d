@@ -88,6 +88,7 @@ typedef struct s_data
 	size_t			present_id;
 	size_t			all_id_present;
 	unsigned int	flag_error;
+	char			*line_gnl;
 	char			**map;
 	t_list			*map_list;
 	int				map_width;
@@ -103,7 +104,7 @@ int		check_file_name(char *file_name);
 		/* Parser file content */
 void	parser(t_data *data, char *file_name);
 int		parse_identifier(t_data *data, int fd);
-void	check_line(t_data *data, char *line);
+void	check_line(t_data *data, char *trimed);
 void	check_double(t_data *data, size_t id, char *line);
 int		*parse_rgb(t_data *data, char *line);
 char	*parse_tex(t_data *data, char *line);
@@ -117,5 +118,6 @@ void	fill_map(t_data *data);
 		/* Utils */
 void	ft_exit_program(t_data *data);
 int		ft_split_len(char **split);
+void	ft_free_split(char **split);
 
 #endif //CUB3D_H
