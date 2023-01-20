@@ -12,10 +12,12 @@
 
 #include "cub3d.h"
 
-int	dodge_empty_line(t_data *data, char *line)
+void	error_empty_line(t_data *data, char *line)
 {
 	char	*trimed;
+	static int i = 0;
 
+	i++;
 	trimed = ft_strtrim(ft_strdup(line), WHITESPACE);
 	if (!*trimed)
 	{
@@ -26,5 +28,4 @@ int	dodge_empty_line(t_data *data, char *line)
 	}
 	if (*trimed)
 		free(trimed);
-	return (0);
 }

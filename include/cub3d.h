@@ -93,6 +93,7 @@ typedef struct s_data
 	t_list			*map_list;
 	size_t			longest_line;
 	int				flag_map_start;
+	int				flag_map_end;
 	int				map_width;
 	int				map_height;
 	int				player_pos_x;
@@ -110,7 +111,7 @@ void	check_line(t_data *data, char *trimed);
 void	check_double(t_data *data, size_t id, char *line);
 int		*parse_rgb(t_data *data, char *line);
 char	*parse_tex(t_data *data, char *line);
-int		dodge_empty_line(t_data *data, char *line);
+void	error_empty_line(t_data *data, char *line);
 
 		/* Parse map */
 void	parse_raw_map(t_data *data, int fd);

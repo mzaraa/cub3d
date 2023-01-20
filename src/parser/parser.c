@@ -27,7 +27,7 @@ void	parser(t_data *data, char *file_name)
 		data->line_gnl = NULL;
 		parse_raw_map(data, fd);
 		check_map(data);
-	//	fill_map(data);
+		fill_map(data);
 	}
 	else
 	{

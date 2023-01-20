@@ -19,11 +19,12 @@ SRCS		:=	\
 	parser/check_file_line.c \
 	parser/parse_identifier.c \
 	parser/parse_rgb.c \
-	parser/dodge_empty_line.c \
+	parser/error_empty_line.c \
 	parser/parse_texture.c \
 	parser/parse_raw_map.c \
-	initialization/fill_map.c \
+	parser/fill_map.c \
 	utils/usefull_func.c \
+#	initialization/fill_map.c \
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 BUILD_DIR	:= .build

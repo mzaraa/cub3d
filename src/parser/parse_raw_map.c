@@ -12,8 +12,23 @@
 
 #include "cub3d.h"
 
+// check if there is an empty line after the map
+void	empty_line_after_map(t_data *data, char *s)
+{
+	char *new_line;
+
+	new_line = ft_strchr(s, '\n');
+	if (!new_line)
+		data->flag_map_end = 1;
+}
+
+/* 
+** check if there is an empty line in the map (not allowed) 
+** and get the longest line in the map (for malloc)
+*/
 void	check_each_line_map(t_data *data, char *s)
 {
+	error_empty_line(data, s);
 	if (data->longest_line < ft_strlen(s))
 		data->longest_line = ft_strlen(s);
 	while (*s)
@@ -33,6 +48,11 @@ void	check_map(t_data *data)
 {
 	t_list	*tmp;
 
+	if(data->flag_map_end == 0)
+	{
+		printf("Error\nEmpty line after map\n");
+		ft_exit_program(data);
+	}
 	tmp = data->map_list;
 	while (tmp)
 	{
@@ -56,23 +76,23 @@ void	parse_raw_map(t_data *data, int fd)
 	while (1)
 	{
 		data->line_gnl = gnl(fd);
-		data->flag_map_start = 1;
 		if (data->line_gnl == NULL)
 			break ;
-		else if (data->line_gnl[0] == '\n' || \
-			dodge_empty_line(data, data->line_gnl))
+		else if (data->line_gnl[0] == '\n' && data->flag_map_start == 0)
 		{
 			free(data->line_gnl);
 			continue ;
 		}
+		data->flag_map_start = 1;
+		empty_line_after_map(data, data->line_gnl);
 		ft_lstadd_back(&data->map_list, ft_lstnew(
 				ft_strtrim(data->line_gnl, "\n")));
 		free(data->line_gnl);
 		i++;
 	}
-	if (data->line_gnl == NULL && i > 0 && data->flag_map_start == 1)
-		printf("Error\nEmpty line at the end of the map");
 	if (i == 0)
+	{
 		printf("Error\nMissing map\n");
-	ft_exit_program(data);
+		ft_exit_program(data);
+	}
 }
