@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 10:42:55 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/18 15:16:47 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/20 12:23:41 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <limits.h>
 # include <math.h>
 # include <errno.h>
-
 
 typedef struct s_list
 {

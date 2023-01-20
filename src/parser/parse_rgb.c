@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:11:39 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/18 19:10:31 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/20 15:49:31 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ int	only_digits(char *rgb)
 int	check_rgb_value(char *rgb)
 {
 	char	**rgb_split;
-//	int i;
 
-//	i = 0;
 	rgb_split = ft_split(rgb, ",");
 	if (rgb_split == NULL || ft_split_len(rgb_split) != 3
 		|| only_digits(rgb_split[0]) || only_digits(rgb_split[1])

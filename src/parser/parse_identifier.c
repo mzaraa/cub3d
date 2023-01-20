@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 11:22:35 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/18 18:16:31 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/20 15:30:49 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ char	*trim_line(t_data *data, char *line)
 	char	*trimed;
 
 	trimed = ft_strtrim(line, WHITESPACE);
-	// printf("trimed: %s\n", trimed);
 	if ((ft_isspace(line[0]) && !*trimed) && data->present_id != 63)
 	{
 		free(line);

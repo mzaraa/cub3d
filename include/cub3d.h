@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:43:51 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/18 18:51:42 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/20 16:51:42 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ typedef struct s_data
 	char			*line_gnl;
 	char			**map;
 	t_list			*map_list;
-	int				longest_line;
+	size_t			longest_line;
+	int				flag_map_start;
 	int				map_width;
 	int				map_height;
 	int				player_pos_x;
@@ -109,7 +110,7 @@ void	check_line(t_data *data, char *trimed);
 void	check_double(t_data *data, size_t id, char *line);
 int		*parse_rgb(t_data *data, char *line);
 char	*parse_tex(t_data *data, char *line);
-int		dodge_empty_line(char *line);
+int		dodge_empty_line(t_data *data, char *line);
 
 		/* Parse map */
 void	parse_raw_map(t_data *data, int fd);
@@ -120,6 +121,6 @@ void	fill_map(t_data *data);
 void	ft_exit_program(t_data *data);
 int		ft_split_len(char **split);
 void	ft_free_split(char **split);
-void	ft_replace_char(char* str, char find, char replace);
+void	ft_replace_char(char *str, char find, char replace);
 
 #endif //CUB3D_H
