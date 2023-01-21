@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:18:23 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/20 16:53:20 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/21 12:08:57 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // check if there is an empty line after the map
 void	empty_line_after_map(t_data *data, char *s)
 {
-	char *new_line;
+	char	*new_line;
 
 	new_line = ft_strchr(s, '\n');
 	if (!new_line)
@@ -35,10 +35,7 @@ void	check_each_line_map(t_data *data, char *s)
 	{
 		if (*s != '0' && *s != '1' && *s != 'N' && *s != 'S' && *s != 'E'
 			&& *s != 'W' && *s != ' ')
-		{
-			printf("Error\nInvalid map\n");
-			ft_exit_program(data);
-		}
+			ft_exit_program(data, "Error\nInvalid map");
 		s++;
 	}
 }
@@ -48,11 +45,8 @@ void	check_map(t_data *data)
 {
 	t_list	*tmp;
 
-	if(data->flag_map_end == 0)
-	{
-		printf("Error\nEmpty line after map\n");
-		ft_exit_program(data);
-	}
+	if (data->flag_map_end == 0)
+		ft_exit_program(data, "Error\nEmpty line after map");
 	tmp = data->map_list;
 	while (tmp)
 	{
@@ -63,7 +57,7 @@ void	check_map(t_data *data)
 	while (tmp)
 	{
 		tmp->content = ft_realloc(tmp->content, ft_strlen(tmp->content), \
-				data->longest_line);
+				(data->longest_line));
 		tmp = tmp->next;
 	}
 }
@@ -91,8 +85,5 @@ void	parse_raw_map(t_data *data, int fd)
 		i++;
 	}
 	if (i == 0)
-	{
-		printf("Error\nMissing map\n");
-		ft_exit_program(data);
-	}
+		ft_exit_program(data, "Error\nMissing map");
 }

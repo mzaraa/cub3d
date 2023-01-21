@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:48:49 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/20 16:04:49 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/21 12:25:11 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	parser(t_data *data, char *file_name)
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 	{
-		perror("Error\nOpening file failed");
-		ft_exit_program(data);
+		ft_exit_program(data, "Error\nOpening file failed");
 	}
 	if (parse_identifier(data, fd))
 	{
@@ -31,8 +30,7 @@ void	parser(t_data *data, char *file_name)
 	}
 	else
 	{
-		perror("Error\nMissing information");
-		ft_exit_program(data);
+		ft_exit_program(data, "Error\nMissing information");
 		close(fd);
 	}
 	close(fd);

@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:24:53 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/18 18:16:34 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/21 12:14:18 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@ void	check_line(t_data *data, char *trimed)
 		}
 		i++;
 	}
-	printf("Error\nInvalid identifier\n");
-	if (*trimed)
+	if (trimed)
 		free(trimed);
-	if (*data->line_gnl)
+	if (data->line_gnl)
 		free(data->line_gnl);
-	ft_exit_program(data);
+	ft_exit_program(data, "Error\nInvalid identifier");
 }

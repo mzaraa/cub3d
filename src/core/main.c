@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:43:36 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/18 19:16:30 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/21 12:25:04 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	init_data(t_data *data)
 int	main(int ac, char **av)
 {
 	t_data	*data;
-	// int i = 0;
 
 	if (ac != 2 || !check_file_name(av[1]))
 	{
@@ -35,13 +34,19 @@ int	main(int ac, char **av)
 	data = malloc(sizeof(t_data));
 	init_data(data);
 	parser(data, av[1]);
-	ft_exit_program(data);
+	ft_exit_program(data, "Success");
+	return (0);
+}
+	// print data file
+
+	// int i = 0;
 	// while (i < 6)
 	// {
 	// 	if (i < 4 && data->id_tab[i].info_tex != NULL)
 	// 		printf("%s\n", data->id_tab[i].info_tex);
 	// 	else if (data->id_tab[i].info_rgb != NULL)
-	// 		printf("%d %d %d\n", data->id_tab[i].info_rgb[0], data->id_tab[i].info_rgb[1], data->id_tab[i].info_rgb[2]);
+	// 	printf("%d %d %d\n", data->id_tab[i].info_rgb[0], 
+	// data->id_tab[i].info_rgb[1], data->id_tab[i].info_rgb[2]);
 	// 	i++;
 	// }
 	// while (data->map_list)
@@ -49,5 +54,3 @@ int	main(int ac, char **av)
 	// 	printf("%s", data->map_list->content);
 	// 	data->map_list = data->map_list->next;
 	// }
-	return (0);
-}

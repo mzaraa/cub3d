@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:43:51 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/20 16:51:42 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/21 10:30:18 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	check_map(t_data *data);
 void	fill_map(t_data *data);
 
 		/* Utils */
-void	ft_exit_program(t_data *data);
+void	ft_exit_program(t_data *data, char *s);
 int		ft_split_len(char **split);
 void	ft_free_split(char **split);
 void	ft_replace_char(char *str, char find, char replace);

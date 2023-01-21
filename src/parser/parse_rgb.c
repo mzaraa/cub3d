@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:11:39 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/20 15:49:31 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/21 10:50:17 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ int	*parse_rgb(t_data *data, char *line)
 		ft_free_split(rgb);
 		free(line);
 		free(data->line_gnl);
-		printf("Error\nInvalid rgb value\n");
-		ft_exit_program(data);
+		ft_exit_program(data, "Error\nInvalid rgb value");
 	}
 	rgb_int = ft_split(rgb[1], ",");
 	ret = malloc(sizeof(int) * 3);
