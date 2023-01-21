@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:44:07 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/16 10:16:18 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/21 15:54:17 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_file_name(char *file_name)
 	i = 0;
 	while (file_name[i])
 		i++;
-	if (ft_strcmp(file_name + i - 4, ".cub") == 0)
+	if ((ft_strlen(file_name) > 4) && !ft_strcmp(file_name + i - 4, ".cub"))
 		return (1);
 	return (0);
 }

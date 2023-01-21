@@ -6,30 +6,27 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:51:47 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/21 12:16:57 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/21 15:40:08 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// todo : free all the data
 void	ft_exit_program(t_data *data, char *s)
 {
-	int	i;
+	static int	i = -1;
 
-	i = 0;
 	printf("%s\n", s);
 	if (data->id_tab != NULL)
 	{
-		while (i < TOTAL)
+		while (++i < TOTAL)
 		{
-			if (data->id_tab[i].id != NULL)
+			if (data->id_tab[i].id)
 				free(data->id_tab[i].id);
-			if (data->id_tab[i].info_tex != NULL)
+			if (data->id_tab[i].info_tex)
 				free(data->id_tab[i].info_tex);
-			else if (data->id_tab[i].info_rgb != NULL)
+			else if (data->id_tab[i].info_rgb)
 				free(data->id_tab[i].info_rgb);
-			i++;
 		}
 		free(data->id_tab);
 		data->id_tab = NULL;

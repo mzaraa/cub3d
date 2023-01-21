@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:52:19 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/21 10:50:33 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/21 15:48:44 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ char	*parse_tex(t_data *data, char *line)
 	if (texture_path == NULL || ft_split_len(texture_path) != 1)
 		data->flag_error = 1;
 	if (data->flag_error || ft_strncmp(*texture_path + \
-		(ft_strlen(*texture_path) - 4), ".xpm", 4) != 0)
+		(ft_strlen(*texture_path) - 4), ".xpm", 4) != 0 || \
+		ft_strlen(*texture_path) <= 4) 
 	{
 		ft_free_split(texture_path);
 		free(line);
-		ft_exit_program(data, "Error\nTexture path invalid");
+		ft_exit_program(data, "Error\nTexture path invalid => \
+Standart: ID ./path_to_the_north_texture.xpm");
 	}
 	texture = ft_strdup(*texture_path);
 	ft_free_split(texture_path);
