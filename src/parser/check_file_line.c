@@ -35,7 +35,5 @@ void	check_line(t_data *data, char *trimed)
 	}
 	if (trimed)
 		free(trimed);
-	if (data->line_gnl)
-		free(data->line_gnl);
 	ft_exit_program(data, "Error\nInvalid identifier");
 }
