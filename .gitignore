@@ -5,4 +5,5 @@
 !**/*.h
 !**/*.hpp
 !.gitignore
+!*.py
 !Makefile
