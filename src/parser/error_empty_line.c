@@ -15,8 +15,11 @@
 void	error_empty_line(t_data *data, char *line)
 {
 	char	*trimed;
+	char 	*tmp;
 
-	trimed = ft_strtrim(ft_strdup(line), WHITESPACE);
+	tmp = ft_strdup(line);
+	trimed = ft_strtrim(tmp, WHITESPACE);
+	free(tmp);
 	if (!*trimed)
 	{
 		free(trimed);

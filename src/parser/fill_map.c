@@ -50,13 +50,11 @@ void	check_map_closed(t_data *data)
 		{
 			if (data->map[i][j] == '0')
 			{
-				if ((i - 1) < 0 || (i + 1) > ft_lstsize(data->map_list) || \
-					(j - 1) < 0 || (j + 1) > (int)ft_strlen(data->map[i]) || \
+				if ((i - 1) < 0 || (i + 1) >= (int)ft_lstsize(data->map_list) || \
+					(j - 1) < 0 || (j + 1) >= (int)data->longest_line || \
 					!data->map[i - 1][j] || !data->map[i + 1][j] || \
 					!data->map[i][j - 1] || !data->map[i][j + 1])
 				{
-					free(data->map);
-					data->map = NULL;
 					ft_exit_program(data, "Error\nMap not closed");
 				}
 			}
@@ -66,9 +64,9 @@ void	check_map_closed(t_data *data)
 
 void	check_pos_player(t_data *data)
 {
-	size_t	i;
-	size_t	j;
-	int		count;
+	int	i;
+	int	j;
+	int	count;
 
 	i = -1;
 	count = 0;
@@ -84,19 +82,16 @@ void	check_pos_player(t_data *data)
 				data->player_dir = data->map[i][j];
 				count++;
 			}
+			if (count > 1)
+				ft_exit_program(data, "Error\nNeed only 1 player position");
 		}
 	}
-	if (count == 1)
-		return ;
-	free(data->map);
-	data->map = NULL;
-	ft_exit_program(data, "Error\nNeed only 1 player position");
 }
 
 void	fill_map(t_data *data)
 {
 	t_list	*tmp;
-	size_t	i;
+	int		i;
 
 	tmp = data->map_list;
 	data->map = malloc(sizeof(char *) * (ft_lstsize(data->map_list) + 1));

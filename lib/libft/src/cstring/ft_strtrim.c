@@ -34,22 +34,15 @@ char	*ft_strtrim(char const	*s1, char const *set)
 	int		rear;
 
 	front = 0;
-	rear = 0;
-	str = NULL;
 	if (!s1)
-		return (0);
+		return (NULL);
+	rear = ft_strlen(s1);
 	while (ft_inset(s1[front], set))
 		front++;
-	while (s1[rear])
-		rear++;
-	while (ft_inset(s1[rear - 1], set) && rear > front)
+	while (rear > front && ft_inset(s1[rear - 1], set))
 		rear--;
-	str = (char *)malloc(sizeof (char) * ((rear - front) + 1));
-	if (!str)
-		return (str);
-	str[rear - front] = '\0';
-	while (rear-- > front)
-		str[rear - front] = s1[rear];
+	if (!(str = ft_substr(s1, front, rear - front)))
+		return (NULL);
 	return (str);
 }
 

@@ -85,7 +85,7 @@ On_IWhite='\033[0;107m'   # White
 
 #	$#		=>	number of arguments
 #	-gt 1	=>	greater than 1
-if [[ $# -gt 1 ]]; then
+if [ $# -gt 1 ]; then
 	echo "Not valid arguments"
 	exit 1
 #	-eq 1	=>	equal to 1
@@ -102,7 +102,7 @@ elif [[ $# -eq 1 ]]; then
 		echo "	sh tester_parsing.sh -v"
 		exit 1
 	fi
-	if [[ $1 == "-v" ]]; then
+	if [ $1 == "-v" ]; then
 		valgrind=true
 	else
 		echo "Not valid arguments"
@@ -117,19 +117,19 @@ echo "==========================================================="
 echo ""
 
 # check if the program exist
-if [[ ! -f $cub3D ]]; then
+if [ ! -f $cub3D ]; then
 	echo -e "${BRed}Error :${Color_Off} $cub3D ${BRed}not found${Color_Off}"
 	exit 1
 fi
 
 # check if the maps folder exist
-if [[ ! -d $maps_folder ]]; then
+if [ ! -d $maps_folder ]; then
 	echo -e "${BRed}Error :${Color_Off} $maps_folder ${BRed}not found${Color_Off}"
 	exit 1
 fi
 
 # if valgrind flag is set to true then create a folder to store the leaks
-if [[ $valgrind == true ]]; then
+if [ $valgrind == true ]; then
 	if [[ ! -d $leaks_folder ]]; then
 		mkdir $leaks_folder
 	fi
@@ -138,7 +138,7 @@ fi
 # if valgrind flag is set to false then print that leaks will not be checked and that the user can use the -v flag
 # then make a pause of 2 seconds to let the user read the message before the script start running the tests
 secs=$((6))
-if [[ $valgrind == false ]]; then
+if [ $valgrind == false ]; then
 	echo -e "${BRed}Warning :${Color_Off} ${BRed}Leaks will not be checked${Color_Off}"
 	echo -e "${BRed}Warning :${Color_Off} ${BRed}You can use the -v flag to check leaks${Color_Off}"
 	while [ $secs -gt 0 ]; do
@@ -149,14 +149,14 @@ done
 fi
 
 # if not folder to store output then create it
-if [[ ! -d $output_folder ]]; then
+if [ ! -d $output_folder ]; then
 	mkdir $output_folder
 fi
 
 # loop on all the maps in the folder
 for map in $maps_folder*.cub; do
 	# check if the map exist
-	if [[ ! -f $map ]]; then
+	if [ ! -f $map ]; then
 		echo -e "${BRed}Error :${Color_Off} $map ${BRed}not found${Color_Off}"
 		exit 1
 	fi
@@ -167,22 +167,22 @@ for map in $maps_folder*.cub; do
 	# display title to know which map is tested
 	echo -e "  ${BBlue}Test $number_of_tests${Color_Off} $map_name :"
 	echo ""
-	if [[ $valgrind == true ]]; then
+	if [ $valgrind == true ]; then
 		valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=$leaks_folder/$map_name.log $cub3D $map
 	else
 		# run the program with the map and check if the exit code is 139 (segmentation fault)
 		$cub3D $map > $output_folder/$map_name.txt
-		if [[ $? -eq 139 ]]; then
+		if [ $? -eq 139 ]; then
 			echo -e "	${BRed}KO${Color_Off} $cub3D ${BRed} => segmentation fault${Color_Off} on $map_name"
 			exit 1
 		fi
-		if [[ $? -eq 134 ]]; then
+		if [ $? -eq 134 ]; then
 			echo -e "	${BRed}KO${Color_Off} $cub3D ${BRed} => bus error${Color_Off} on $map_name"
 			exit 1
 		fi
 		# check if the program return an error message, if yes the test passed
 		cat $output_folder/$map_name.txt | grep "Error" > /dev/null
-		if [[ $? -eq 0 ]]; then 
+		if [ $? -eq 0 ]; then 
 			echo -e "	${On_Green}Test passed${Color_Off} on $map_name => ${BGreen}OK${Color_Off}"
 		else
 			echo -e "	${On_Red}Test failed on $map_name => ${BRed}KO${Color_Off}"

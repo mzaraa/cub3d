@@ -9,3 +9,5 @@
 !**/*.cub
 !*.sh
 !Makefile
+microshell.c
+cub3D_map_tester/

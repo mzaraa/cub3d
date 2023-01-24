@@ -18,7 +18,11 @@ char	*trim_line(t_data *data, char *line)
 
 	trimed = ft_strtrim(line, WHITESPACE);
 	if ((ft_isspace(line[0]) && !*trimed) && data->present_id != 63)
+	{
+		if (trimed != NULL)
+			free(trimed);
 		ft_exit_program(data, "Error\nNot empty line detected");
+	}
 	return (trimed);
 }
 
