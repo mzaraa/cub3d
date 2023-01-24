@@ -6,4 +6,6 @@
 !**/*.hpp
 !.gitignore
 !*.py
+!**/*.cub
+!*.sh
 !Makefile
