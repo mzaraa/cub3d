@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:18:23 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/21 12:08:57 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/26 09:50:42 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	check_map(t_data *data)
 {
 	t_list	*tmp;
 
-	if (data->flag_map_end == 0)
-		ft_exit_program(data, "Error\nEmpty line after map");
+	// if (data->flag_map_end == 0)
+	// 	ft_exit_program(data, "Error\nEmpty line after map");
 	tmp = data->map_list;
 	while (tmp)
 	{
@@ -70,7 +70,7 @@ void	parse_raw_map(t_data *data, int fd)
 	while (1)
 	{
 		data->line_gnl = gnl(fd);
-		if (data->line_gnl == NULL)
+		if (data->line_gnl == NULL || data->line_gnl[0] == '\0')
 			break ;
 		else if (data->line_gnl[0] == '\n' && data->flag_map_start == 0)
 		{

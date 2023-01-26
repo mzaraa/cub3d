@@ -91,18 +91,18 @@ if [ $# -gt 1 ]; then
 #	-eq 1	=>	equal to 1
 elif [[ $# -eq 1 ]]; then
 	if [[ $1 == "-h" ]]; then
-		echo "${BBlue}This script have 2 option flag available${Color_Off} => ${BRed}-h${Color_Off} and ${BRed}-v${Color_Off}"
+		echo "${BBlue}This script have 2 option flag available${Color_Off} => ${BRed}-h${Color_Off} and ${BRed}-l${Color_Off}"
 		echo ""
 		echo "'-h' for help, display this informations about how to use this script."
 
-		echo "'-v' for valgrind, run valgrind on your program."
+		echo "'-l' to check leaks, this will create a folder named 'leaks' and store the leaks in it."
 		echo ""
 		echo "${BBlue}Usage :${Color_Off}"
 		echo "	sh tester_parsing.sh -h"
-		echo "	sh tester_parsing.sh -v"
+		echo "	sh tester_parsing.sh -l"
 		exit 1
 	fi
-	if [ $1 == "-v" ]; then
+	if [ $1 == "-l" ]; then
 		valgrind=true
 	else
 		echo "Not valid arguments"
@@ -114,7 +114,6 @@ fi
 echo "==========================================================="
 echo -e "${BYellow}                   Cub3D parsing tester                     ${Color_Off}"
 echo "==========================================================="
-echo ""
 
 # check if the program exist
 if [ ! -f $cub3D ]; then
@@ -135,12 +134,12 @@ if [ $valgrind == true ]; then
 	fi
 fi
 
-# if valgrind flag is set to false then print that leaks will not be checked and that the user can use the -v flag
+# if valgrind flag is set to false then print that leaks will not be checked and that the user can use the -l flag
 # then make a pause of 2 seconds to let the user read the message before the script start running the tests
 secs=$((6))
 if [ $valgrind == false ]; then
 	echo -e "${BRed}Warning :${Color_Off} ${BRed}Leaks will not be checked${Color_Off}"
-	echo -e "${BRed}Warning :${Color_Off} ${BRed}You can use the -v flag to check leaks${Color_Off}"
+	echo -e "${BRed}Warning :${Color_Off} ${BRed}You can use the -l flag to check leaks${Color_Off}"
 	while [ $secs -gt 0 ]; do
 	echo -ne "Test starting in $secs\033[0K second \r"
 	sleep 1
@@ -164,30 +163,45 @@ for map in $maps_folder*.cub; do
 
 	# get the name of the map test for creating the log file
 	map_name=$(echo $map | cut -d'/' -f 3 | cut -d'.' -f 1)
-	# display title to know which map is tested
-	echo -e "  ${BBlue}Test $number_of_tests${Color_Off} $map_name :"
 	echo ""
+	# display title to know which map is tested
+	echo -en "${BBlue}Test $number_of_tests${Color_Off} ${Yellow} $map_name ${Color_Off}: "
 	if [ $valgrind == true ]; then
-		valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=$leaks_folder/$map_name.log $cub3D $map
+		valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=$leaks_folder/$map_name.log $cub3D $map > $output_folder/$map_name.txt
+		if [ $? -eq 139 ]; then
+			echo -en "	${BRed}KO${Color_Off} $cub3D ${BRed} => segmentation fault${Color_Off} on $map_name"
+			continue
+		fi
+		if [ $? -eq 134 ]; then
+			echo -en "	${BRed}KO${Color_Off} $cub3D ${BRed} => bus error${Color_Off} on $map_name"
+			continue
+		fi
+		lost=$(cat $leaks_folder/$map_name.log | grep "definitely lost:" | cut -d':' -f 2 | cut -d' ' -f 2)
+		indirect=$(cat $leaks_folder/$map_name.log | grep "indirectly lost:" | cut -d':' -f 2 | cut -d' ' -f 2)
+		if [ $lost -eq 0 ] && [ $indirect -eq 0 ]; then
+			echo -en "${BGreen}OK${Color_Off}"
+		else
+			echo -en "${BRed}KO${Color_Off} $cub3D ${BRed} => leaks${Color_Off} on $map_name"
+			continue
+		fi
 	else
+		echo -n ' ' > $output_folder/$map_name.txt
 		# run the program with the map and check if the exit code is 139 (segmentation fault)
 		$cub3D $map > $output_folder/$map_name.txt
 		if [ $? -eq 139 ]; then
-			echo -e "	${BRed}KO${Color_Off} $cub3D ${BRed} => segmentation fault${Color_Off} on $map_name"
-			exit 1
+			echo -en "	${BRed}KO${Color_Off} $cub3D ${BRed} => segmentation fault${Color_Off} on $map_name"
+			continue
 		fi
 		if [ $? -eq 134 ]; then
-			echo -e "	${BRed}KO${Color_Off} $cub3D ${BRed} => bus error${Color_Off} on $map_name"
-			exit 1
+			echo -en "	${BRed}KO${Color_Off} $cub3D ${BRed} => bus error${Color_Off} on $map_name"
+			continue
 		fi
 		# check if the program return an error message, if yes the test passed
-		cat $output_folder/$map_name.txt | grep "Error" > /dev/null
+		cat $output_folder/$map_name.txt | grep $'Error\n' > /dev/null
 		if [ $? -eq 0 ]; then 
-			echo -e "	${On_Green}Test passed${Color_Off} on $map_name => ${BGreen}OK${Color_Off}"
+			echo -en "${BGreen}OK${Color_Off}"
 		else
-			echo -e "	${On_Red}Test failed on $map_name => ${BRed}KO${Color_Off}"
+			echo -en "	${On_Red}Test failed on $map_name => ${BRed}KO${Color_Off}"
 		fi
-		echo "____________________________________________________________"
-		echo ""
 	fi
 done
