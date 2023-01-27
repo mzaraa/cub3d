@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:11:39 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/21 15:45:46 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/27 13:44:29 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,24 @@ int	check_rgb_value(char *rgb)
 	return (0);
 }
 
+int	check_comma(char *s)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (s[i])
+	{
+		if (s[i] == ',')
+			count++;
+		i++;
+	}
+	if (count > 2)
+		return (1);
+	return (0);
+}
+
 /*
 **	Parse the rgb values from the line+1 (to skip the identifier) and split it
 **	into an array of strings. Check if the array size is 3 or more and if the 
@@ -60,7 +78,7 @@ int	*parse_rgb(t_data *data, char *line)
 	rgb = ft_split(line, " \n\t");
 	if (rgb == NULL || ft_split_len(rgb) != 2)
 		data->flag_error = 1;
-	if (data->flag_error || check_rgb_value(rgb[1]))
+	if (data->flag_error || check_rgb_value(rgb[1]) || check_comma(rgb[1]))
 	{
 		ft_free_split(rgb);
 		free(line);

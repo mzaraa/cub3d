@@ -135,16 +135,10 @@ if [ $valgrind == true ]; then
 fi
 
 # if valgrind flag is set to false then print that leaks will not be checked and that the user can use the -l flag
-# then make a pause of 2 seconds to let the user read the message before the script start running the tests
-secs=$((6))
 if [ $valgrind == false ]; then
 	echo -e "${BRed}Warning :${Color_Off} ${BRed}Leaks will not be checked${Color_Off}"
 	echo -e "${BRed}Warning :${Color_Off} ${BRed}You can use the -l flag to check leaks${Color_Off}"
-	while [ $secs -gt 0 ]; do
-	echo -ne "Test starting in $secs\033[0K second \r"
-	sleep 1
-	: $((secs--))
-done
+	read -p "Press enter to continue"
 fi
 
 # if not folder to store output then create it
@@ -197,11 +191,11 @@ for map in $maps_folder*.cub; do
 			continue
 		fi
 		# check if the program return an error message, if yes the test passed
-		cat $output_folder/$map_name.txt | grep $'Error\n' > /dev/null
+		cat $output_folder/$map_name.txt | grep 'Error' > /dev/null
 		if [ $? -eq 0 ]; then 
 			echo -en "${BGreen}OK${Color_Off}"
 		else
-			echo -en "	${On_Red}Test failed on $map_name => ${BRed}KO${Color_Off}"
+			echo -en "${On_Red}Test failed on $map_name => ${BRed}KO${Color_Off}"
 		fi
 	fi
 done

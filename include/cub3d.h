@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:43:51 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/21 10:30:18 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/27 11:44:13 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ typedef struct s_data
 	t_list			*map_list;
 	size_t			longest_line;
 	int				flag_map_start;
-	int				flag_map_end;
 	int				map_width;
 	int				map_height;
 	int				player_pos_x;

@@ -6,21 +6,11 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:18:23 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/26 09:50:42 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/27 11:43:59 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// check if there is an empty line after the map
-void	empty_line_after_map(t_data *data, char *s)
-{
-	char	*new_line;
-
-	new_line = ft_strchr(s, '\n');
-	if (!new_line)
-		data->flag_map_end = 1;
-}
 
 /* 
 ** check if there is an empty line in the map (not allowed) 
@@ -45,8 +35,6 @@ void	check_map(t_data *data)
 {
 	t_list	*tmp;
 
-	// if (data->flag_map_end == 0)
-	// 	ft_exit_program(data, "Error\nEmpty line after map");
 	tmp = data->map_list;
 	while (tmp)
 	{
@@ -78,7 +66,6 @@ void	parse_raw_map(t_data *data, int fd)
 			continue ;
 		}
 		data->flag_map_start = 1;
-		empty_line_after_map(data, data->line_gnl);
 		ft_lstadd_back(&data->map_list, ft_lstnew(
 				ft_strtrim(data->line_gnl, "\n")));
 		free(data->line_gnl);

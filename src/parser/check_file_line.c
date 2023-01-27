@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:24:53 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/21 12:14:18 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/27 14:01:18 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,29 @@
 
 void	check_line(t_data *data, char *trimed)
 {
-	const t_tuple	tab[] = {{"NO", NO, 2}, {"SO", SO, 2}, {"WE", WE, 2},
-	{"EA", EA, 2}, {"F", F, 1}, {"C", C, 1}, {NULL, TOTAL, 0}};
+	const char		*tab[] = {"NO", "SO", "WE", "EA", "F", "C", NULL};
 	unsigned int	i;
+	char			**split;
 
 	i = 0;
-	while (tab[i].id_str)
+	split = ft_split(trimed, WHITESPACE);
+	while (tab[i])
 	{
-		if (ft_strncmp(trimed, tab[i].id_str, tab[i].i) == 0)
+		// printf("(%s == %s) = %d\n", split[0], tab[i], )
+		if (ft_strcmp(split[0], tab[i]) == 0)
 		{
-			check_double(data, tab[i].enum_v, trimed);
-			data->id_tab[tab[i].enum_v].id = ft_strdup(tab[i].id_str);
-			if (tab[i].enum_v == F || tab[i].enum_v == C)
-				data->id_tab[tab[i].enum_v].info_rgb = parse_rgb(data, trimed);
+			check_double(data, i, trimed);
+			data->id_tab[i].id = ft_strdup(tab[i]);
+			if (i == F || i == C)
+				data->id_tab[i].info_rgb = parse_rgb(data, trimed);
 			else
-				data->id_tab[tab[i].enum_v].info_tex = parse_tex(data, trimed);
+				data->id_tab[i].info_tex = parse_tex(data, trimed);
+			ft_free_split(split);
 			return ;
 		}
 		i++;
 	}
+	ft_free_split(split);
 	if (trimed)
 		free(trimed);
 	ft_exit_program(data, "Error\nInvalid identifier");

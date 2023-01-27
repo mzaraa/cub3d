@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 10:31:04 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/21 11:43:41 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/27 14:14:59 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	check_map_closed(t_data *data)
 			{
 				if ((i - 1) < 0 || (i + 1) >= (int)ft_lstsize(data->map_list) || \
 					(j - 1) < 0 || (j + 1) >= (int)data->longest_line || \
-					!data->map[i - 1][j] || !data->map[i + 1][j] || \
-					!data->map[i][j - 1] || !data->map[i][j + 1])
+					!ft_strchr("01", data->map[i - 1][j]) || !ft_strchr("01", data->map[i + 1][j]) || \
+					!ft_strchr("01", data->map[i][j - 1]) || !ft_strchr("01", data->map[i][j + 1]))
 				{
 					ft_exit_program(data, "Error\nMap not closed");
 				}
