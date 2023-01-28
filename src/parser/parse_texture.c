@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:52:19 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/21 15:48:44 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/27 16:51:32 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*parse_tex(t_data *data, char *line)
 		data->flag_error = 1;
 	if (data->flag_error || ft_strncmp(*texture_path + \
 		(ft_strlen(*texture_path) - 4), ".xpm", 4) != 0 || \
-		ft_strlen(*texture_path) <= 4) 
+		ft_strlen(*texture_path) <= 4)
 	{
 		ft_free_split(texture_path);
 		free(line);

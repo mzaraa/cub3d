@@ -1,7 +1,7 @@
 
 WE ./woolftex/./textures_xpm/naturalbricks_hd_verydark.xpm
 SO ./textures_xpm/naturalbricks_hd_verydark.xpm
-EA ./textures_xpm/naturalbricks_hd_verydark.xpm
+E ./textures_xpm/naturalbricks_hd_verydark.xpm
 NO ./textures_xpm/naturalbricks_hd_verydark.xpm
 
 C 155,100,160

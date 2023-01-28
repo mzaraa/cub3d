@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 14:46:13 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/20 16:13:15 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/27 16:35:48 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ char	*ft_strtrim(char const	*s1, char const *set)
 		front++;
 	while (rear > front && ft_inset(s1[rear - 1], set))
 		rear--;
-	if (!(str = ft_substr(s1, front, rear - front)))
+	str = ft_substr(s1, front, rear - front);
+	if (!str)
 		return (NULL);
 	return (str);
 }

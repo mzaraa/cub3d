@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:24:53 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/27 14:01:18 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/01/27 16:43:05 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	check_line(t_data *data, char *trimed)
 	split = ft_split(trimed, WHITESPACE);
 	while (tab[i])
 	{
-		// printf("(%s == %s) = %d\n", split[0], tab[i], )
 		if (ft_strcmp(split[0], tab[i]) == 0)
 		{
 			check_double(data, i, trimed);
