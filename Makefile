@@ -24,6 +24,7 @@ SRCS		:=	\
 	parser/parse_raw_map.c \
 	parser/fill_map.c \
 	utils/usefull_func.c \
+	game/run_game.c \
 #	initialization/fill_map.c \
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
@@ -47,12 +48,12 @@ libft:
 	@$(MAKE) -C lib/libft
 
 $(NAME): $(OBJS) $(LIBS_TARGET)
-	@$(CC) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $(NAME)
+	@$(CC) $(LDFLAGS) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit $(LDLIBS) -o $(NAME)
 	$(info CREATED $(NAME))
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(DIR_DUP)
-	@$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) -Imlx $(CPPFLAGS) -c -o $@ $<
 	$(info CREATED $@)
 
 -include $(DEPS)

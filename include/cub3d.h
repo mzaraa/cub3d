@@ -17,6 +17,8 @@
 # include "colors.h"
 
 # define WHITESPACE " \t\n\v\f\r"
+# define HEIGHT 800
+# define WIDTH 600
 /*
 ** Represent the identifier of the elements in the .cub file
 */
@@ -71,6 +73,21 @@ typedef struct s_elements
 	};
 }	t_elements;
 
+typedef struct s_game
+{
+	void	*mlx;
+	void	*win;
+}	t_game;
+
+typedef struct s_mlximg
+{
+	void	*ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_mlximg;
+
 /*
 **	Main struct contain different elements used for parsing and game 
 **	management.
@@ -98,6 +115,8 @@ typedef struct s_data
 	int				player_pos_x;
 	int				player_pos_y;
 	int				player_dir;
+	t_mlximg		*mlximg;
+	t_game			*game;
 }	t_data;
 
 		/* Parser file name */
