@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	ft_exit_program(t_data *data, char *s)
+int	ft_exit_program(t_data *data, char *s)
 {
 	static int	i = -1;
 

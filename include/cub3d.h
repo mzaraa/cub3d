@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "colors.h"
+#include "mlx.h"
 
 # define WHITESPACE " \t\n\v\f\r"
 # define HEIGHT 800
@@ -73,16 +74,12 @@ typedef struct s_elements
 	};
 }	t_elements;
 
-typedef struct s_game
-{
-	void	*mlx;
-	void	*win;
-}	t_game;
-
 typedef struct s_mlximg
 {
-	void	*ptr;
-	char	*addr;
+	void	*img;
+	char		*img_str;
+	int 	width;
+	int		height;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -100,7 +97,15 @@ typedef struct s_mlximg
 */
 typedef struct s_data
 {
+	void			*mlx;
+	void			*win;
+	void			*img;
+	void			*img_str;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
 	t_elements		*id_tab;
+	t_mlximg		mlximg[4];
 	size_t			state;
 	size_t			present_id;
 	size_t			all_id_present;
@@ -115,8 +120,6 @@ typedef struct s_data
 	int				player_pos_x;
 	int				player_pos_y;
 	int				player_dir;
-	t_mlximg		*mlximg;
-	t_game			*game;
 }	t_data;
 
 		/* Parser file name */
@@ -137,9 +140,12 @@ void	check_map(t_data *data);
 void	fill_map(t_data *data);
 
 		/* Utils */
-void	ft_exit_program(t_data *data, char *s);
+int		ft_exit_program(t_data *data, char *s);
 int		ft_split_len(char **split);
 void	ft_free_split(char **split);
 void	ft_replace_char(char *str, char find, char replace);
+
+		/* Games */
+void	run_game(t_data *data);
 
 #endif //CUB3D_H

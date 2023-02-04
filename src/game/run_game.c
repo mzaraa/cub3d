@@ -1,31 +1,60 @@
 #include "cub3d.h"
 
-static int	main_loop(t_data *data)
+void set_img(t_data *data)
 {
-    mlx_put_image_to_window(data->game->mlx, data->game->win, data->mlximg->ptr, 0, 0);
-    return (0);
+    data->mlximg[0].img = mlx_xpm_file_to_image(data->mlx, "/Users/PietriniGlenn/Desktop/cub3d/xpm/mur.xpm", &data->map_width, &data->map_height);
+    data->mlximg[0].img_str = mlx_get_data_addr(data->mlximg[0].img, &data->mlximg[0].bits_per_pixel, &data->mlximg[0].line_length, &data->mlximg[0].endian);
 }
 
-t_mlximg    *creat_img(void *mlx, int width, int height)
+void get_texture(t_data *data)
 {
-    t_mlximg	*img;
+    int x;
+    int y;
+    int i;
+    int j;
 
-    img->ptr = mlx_new_image(mlx, width, height);
-    img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel, &img->line_length, &img->endian);
-    return (img);
+    x = 0;
+    y = 0;
+    i = 0;
+    j = 0;
+    while (y < (int)ft_lstsize(data->map_list))
+    {
+        while (x < (int)data->longest_line)
+        {
+            if (data->map[i][j] == '1')
+            {
+              mlx_put_image_to_window(data->mlx, data->win, data->mlximg[0].img, i * 30, j * 30);     
+            }
+            x++;
+            j++;
+        }
+
+
+        x = 0;
+        j = 0;
+        y++;
+        i++;
+    }
+
+
+
 }
+
 
 void	run_game(t_data *data)
 {
-    data->game->mlx = mlx_init();
-    data->game->win = mlx_new_window(data->game->mlx, WIDTH, HEIGHT, "Cub3D");
-    data->mlximg = creat_img(data->game->mlx, WIDTH, HEIGHT);
-    mlx_put_image_to_window(data->game->mlx, data->game->win, data->mlximg->ptr, 0, 0);
 
-    //mlx_hook(data->game->win, 3, 0, &key_release, &info);
-    //mlx_hook(data->game->win, 17, 0, &exit_game, &info);
-    mlx_loop_hook(data->game->mlx, main_loop, &data);
-    //mlx_hook(data->game->win, 2, 0, &key_press, &info);
-    mlx_loop(data->game->mlx);
+    data->mlx = mlx_init();
+    data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Cub3D");
+    data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+    data->img_str = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_length, &data->endian);
+    set_img(data);
+    get_texture(data);
+    //mlx_hook(data->game->win, 2, 1L<<0, key_press, data);
+    //mlx_hook(data->game->win, 3, 1L<<1, key_release, data);
+    mlx_hook(data->win, 17, 1L<<17, ft_exit_program, data);
+    //mlx_loop_hook(data->mlx, main_loop, data);
+    mlx_loop(data->mlx);
+    
 }
 

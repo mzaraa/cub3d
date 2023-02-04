@@ -20,6 +20,7 @@ void	init_data(t_data *data)
 	data->state = INIT;
 	data->all_id_present = 63;
 	data->map_list = NULL;
+
 }
 
 int	main(int ac, char **av)
@@ -34,6 +35,7 @@ int	main(int ac, char **av)
 	data = malloc(sizeof(t_data));
 	init_data(data);
 	parser(data, av[1]);
+	run_game(data);
 	ft_exit_program(data, "Success");
 	return (0);
 }
