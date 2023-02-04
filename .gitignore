@@ -8,6 +8,8 @@
 !*.py
 !**/*.cub
 !*.sh
+!**/*.xpm
 !Makefile
+!/mlx
 microshell.c
 cub3D_map_tester/

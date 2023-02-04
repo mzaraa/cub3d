@@ -2,7 +2,7 @@
 
 void set_img(t_data *data)
 {
-    data->mlximg[0].img = mlx_xpm_file_to_image(data->mlx, "/Users/PietriniGlenn/Desktop/cub3d/xpm/mur.xpm", &data->map_width, &data->map_height);
+    data->mlximg[0].img = mlx_xpm_file_to_image(data->mlx, "/Users/pietriniglenn/Desktop/cub3d/xpm/sol.xpm", &data->map_width, &data->map_height);
     data->mlximg[0].img_str = mlx_get_data_addr(data->mlximg[0].img, &data->mlximg[0].bits_per_pixel, &data->mlximg[0].line_length, &data->mlximg[0].endian);
 }
 

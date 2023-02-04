@@ -5,6 +5,10 @@ LIBS		:= ft
 LIBS_TARGET :=	\
 	lib/libft/libft.a		\
 
+MINILIBX_DIR = mlx/
+MINILIBX = libmlx.dylib
+
+
 INCS		:= \
 	include					\
 	lib/libft/include		\
@@ -48,8 +52,10 @@ libft:
 	@$(MAKE) -C lib/libft
 
 $(NAME): $(OBJS) $(LIBS_TARGET)
+	@make -C $(MINILIBX_DIR)
 	@$(CC) $(LDFLAGS) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit $(LDLIBS) -o $(NAME)
 	$(info CREATED $(NAME))
+	@cp -rf $(MINILIBX_DIR)$(MINILIBX) .
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(DIR_DUP)
@@ -60,11 +66,13 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 
 clean:
 	@for f in $(dir $(LIBS_TARGET)); do $(MAKE) -C $$f clean; done
+	rm -f $(OBJ) $(MINILIBX)
+	make clean -C $(MINILIBX_DIR)
 	@$(RM) $(OBJS) $(DEPS)
 
 fclean: clean
 	@for f in $(dir $(LIBS_TARGET)); do $(MAKE) -C $$f fclean; done
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(MINILIBX_DIR)$(MINILIBX)
 
 re:
 	@$(MAKE) fclean
