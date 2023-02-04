@@ -9,7 +9,9 @@
 !**/*.cub
 !*.sh
 !**/*.xpm
+!**/*.swift
+!**/*.swiftsourceinfo
+!**/*/*.3
 !Makefile
-!/mlx
 microshell.c
 cub3D_map_tester/
