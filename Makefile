@@ -29,6 +29,7 @@ SRCS		:=	\
 	parser/fill_map.c \
 	utils/usefull_func.c \
 	game/run_game.c \
+	game/handle_key.c \
 #	initialization/fill_map.c \
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)

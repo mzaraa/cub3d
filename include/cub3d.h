@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:43:51 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/27 11:44:13 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/06 15:12:51 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 
 # include "libft.h"
 # include "colors.h"
-#include "mlx.h"
+# include "keycode.h"
+# include <mlx.h>
 
 # define WHITESPACE " \t\n\v\f\r"
-# define HEIGHT 800
-# define WIDTH 600
+# define WINDOW_WIDTH 600
+# define WINDOW_HEIGHT 300
+
 /*
 ** Represent the identifier of the elements in the .cub file
 */
@@ -39,9 +41,8 @@ enum e_identifier
 */
 enum e_state
 {
+	PARSING,
 	INIT,
-	PARSE_ID,
-	PARSE_MAP,
 	GAME,
 	STOP
 };
@@ -74,16 +75,16 @@ typedef struct s_elements
 	};
 }	t_elements;
 
-typedef struct s_mlximg
+typedef struct s_img
 {
-	void	*img;
-	char		*img_str;
-	int 	width;
+	void	*mlx_img;
+	char	*addr;
+	int		width;
 	int		height;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}	t_mlximg;
+}	t_img;
 
 /*
 **	Main struct contain different elements used for parsing and game 
@@ -97,19 +98,16 @@ typedef struct s_mlximg
 */
 typedef struct s_data
 {
-	void			*mlx;
-	void			*win;
-	void			*img;
-	void			*img_str;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	t_img			img;
+	t_img			tex_img[4];
 	t_elements		*id_tab;
-	t_mlximg		mlximg[4];
 	size_t			state;
 	size_t			present_id;
 	size_t			all_id_present;
 	unsigned int	flag_error;
+	char			keys[512];
 	char			*line_gnl;
 	char			**map;
 	t_list			*map_list;
@@ -147,5 +145,11 @@ void	ft_replace_char(char *str, char find, char replace);
 
 		/* Games */
 void	run_game(t_data *data);
+
+		/* Key management */
+int		key_press(int keycode, t_data *data);
+int		key_release(int keycode, t_data *data);
+int		close_window(t_data *data);
+void	ft_destroy_mlx(t_data *data);
 
 #endif //CUB3D_H

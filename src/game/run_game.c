@@ -1,60 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   run_game.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/06 10:06:54 by mzaraa            #+#    #+#             */
+/*   Updated: 2023/02/06 14:05:56 by mzaraa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-void set_img(t_data *data)
+void	ft_destroy_mlx(t_data *data)
 {
-    data->mlximg[0].img = mlx_xpm_file_to_image(data->mlx, "/Users/pietriniglenn/Desktop/cub3d/xpm/sol.xpm", &data->map_width, &data->map_height);
-    data->mlximg[0].img_str = mlx_get_data_addr(data->mlximg[0].img, &data->mlximg[0].bits_per_pixel, &data->mlximg[0].line_length, &data->mlximg[0].endian);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	free(data->mlx_ptr);
+	ft_exit_program(data, "Exit program");
 }
 
-void get_texture(t_data *data)
+int	handle_no_event(void *data)
 {
-    int x;
-    int y;
-    int i;
-    int j;
+	(void)data;
 
-    x = 0;
-    y = 0;
-    i = 0;
-    j = 0;
-    while (y < (int)ft_lstsize(data->map_list))
-    {
-        while (x < (int)data->longest_line)
-        {
-            if (data->map[i][j] == '1')
-            {
-              mlx_put_image_to_window(data->mlx, data->win, data->mlximg[0].img, i * 30, j * 30);     
-            }
-            x++;
-            j++;
-        }
-
-
-        x = 0;
-        j = 0;
-        y++;
-        i++;
-    }
-
-
-
+	/* This function needs to exist, but it is useless for the moment */
+	return (0);
 }
 
 
 void	run_game(t_data *data)
 {
 
-    data->mlx = mlx_init();
-    data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Cub3D");
-    data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-    data->img_str = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_length, &data->endian);
-    set_img(data);
-    get_texture(data);
-    //mlx_hook(data->game->win, 2, 1L<<0, key_press, data);
-    //mlx_hook(data->game->win, 3, 1L<<1, key_release, data);
-    mlx_hook(data->win, 17, 1L<<17, ft_exit_program, data);
-    //mlx_loop_hook(data->mlx, main_loop, data);
-    mlx_loop(data->mlx);
-    
+	data->mlx_ptr = mlx_init();
+	if (!data->mlx_ptr)
+		ft_exit_program(data, "Error\nmlx_init() failed");
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D");
+	if (!data->win_ptr)
+		ft_exit_program(data, "Error\nmlx_new_window() failed");
+	mlx_loop_hook(data->mlx_ptr, &handle_no_event, data);
+	mlx_hook(data->win_ptr, 3, 0, key_release, data);
+	mlx_hook(data->win_ptr, 2, 0, key_press, data);
+	mlx_hook(data->win_ptr, 17, 0, close_window, data);
+	mlx_loop(data->mlx_ptr);
 }
-
