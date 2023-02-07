@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "colors.h"
 # include "keycode.h"
+# include <stdint.h>
 # include <mlx.h>
 
 # define WHITESPACE " \t\n\v\f\r"

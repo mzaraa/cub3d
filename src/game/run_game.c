@@ -19,6 +19,11 @@ void	ft_destroy_mlx(t_data *data)
 	ft_exit_program(data, "Exit program");
 }
 
+int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
+{
+	return (red << 16 | green << 8 | blue);
+}
+
 int	handle_no_event(void *data)
 {
 	(void)data;
