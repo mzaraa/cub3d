@@ -19,32 +19,24 @@ void	ft_destroy_mlx(t_data *data)
 	ft_exit_program(data, "Exit program");
 }
 
-int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
-{
-	return (red << 16 | green << 8 | blue);
-}
-
-int	handle_no_event(void *data)
-{
-	(void)data;
-
-	/* This function needs to exist, but it is useless for the moment */
-	return (0);
-}
-
-
 void	run_game(t_data *data)
 {
-
+    
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		ft_exit_program(data, "Error\nmlx_init() failed");
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D");
 	if (!data->win_ptr)
 		ft_exit_program(data, "Error\nmlx_new_window() failed");
-	mlx_loop_hook(data->mlx_ptr, &handle_no_event, data);
-	mlx_hook(data->win_ptr, 3, 0, key_release, data);
-	mlx_hook(data->win_ptr, 2, 0, key_press, data);
+    data->img.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+    if (!data->img.mlx_img)
+        ft_exit_program(data, "Error\nmlx_new_image() failed");
+    data->img.addr = mlx_get_data_addr(data->img.mlx_img, &data->img.bpp, &data->img.line_length, &data->img.endian);
+	if (!data->img.addr)
+		ft_exit_program(data, "Error\nmlx_get_data_addr() failed");
+	mlx_loop_hook(data->mlx_ptr, &render, data);
+	mlx_hook(data->win_ptr, 3, (1L<<1), key_release, data);
+	mlx_hook(data->win_ptr, 2, (1L<<0), key_press, data);
 	mlx_hook(data->win_ptr, 17, 0, close_window, data);
 	mlx_loop(data->mlx_ptr);
 }

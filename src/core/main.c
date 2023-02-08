@@ -23,6 +23,40 @@ void	init_data(t_data *data)
 	ft_memset(data->keys, 0, sizeof(char) * 512);
 }
 
+void	init_player(t_data *data)
+{
+	data->player.x = data->player_pos_x + 0.5;
+	data->player.y = data->player_pos_y + 0.5;
+	if (data->player_dir == 'N')
+	{
+		data->player.dir_x = 0;
+		data->player.dir_y = 1;
+		data->player.plane_x = 0.66;
+		data->player.plane_y = 0;
+	}
+	else if (data->player_dir == 'S')
+	{
+		data->player.dir_x = 0;
+		data->player.dir_y = -1;
+		data->player.plane_x = -0.66;
+		data->player.plane_y = 0;
+	}
+	else if (data->player_dir == 'E')
+	{
+		data->player.dir_x = 1;
+		data->player.dir_y = 0;
+		data->player.plane_x = 0;
+		data->player.plane_y = 0.66;
+	}
+	else if (data->player_dir == 'W')
+	{
+		data->player.dir_x = -1;
+		data->player.dir_y = 0;
+		data->player.plane_x = 0;
+		data->player.plane_y = -0.66;
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_data	*data;
@@ -35,6 +69,7 @@ int	main(int ac, char **av)
 	data = malloc(sizeof(t_data));
 	init_data(data);
 	parser(data, av[1]);
+	init_player(data);
 	run_game(data);
 	ft_exit_program(data, "Success");
 	return (0);

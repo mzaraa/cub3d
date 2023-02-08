@@ -20,8 +20,13 @@
 # include <mlx.h>
 
 # define WHITESPACE " \t\n\v\f\r"
-# define WINDOW_WIDTH 600
-# define WINDOW_HEIGHT 300
+# define WINDOW_WIDTH 800
+# define WINDOW_HEIGHT 800
+
+# define RED_PIXEL 0xFF0000
+# define GREEN_PIXEL 0xFF00
+# define WHITE_PIXEL 0xFFFFFF
+# define BLUE_PIXEL 0xFF
 
 /*
 ** Represent the identifier of the elements in the .cub file
@@ -47,6 +52,46 @@ enum e_state
 	GAME,
 	STOP
 };
+
+/*
+** Just a simple struct draw the minimap
+*/
+typedef struct s_rect
+{
+	int	x;
+	int	y;
+	int width;
+	int height;
+	int color;
+}	t_rect;
+
+typedef struct s_player
+{
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+}	t_player;
+
+typedef struct s_ray
+{
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+}	t_ray;
 
 /*
 ** Simple struct used to make and array of tuple, used to parse each line of the
@@ -82,7 +127,7 @@ typedef struct s_img
 	char	*addr;
 	int		width;
 	int		height;
-	int		bits_per_pixel;
+	int		bpp; // bits per pixel, when divided by 8 gives the number of bytes per pixel
 	int		line_length;
 	int		endian;
 }	t_img;
@@ -119,6 +164,7 @@ typedef struct s_data
 	int				player_pos_x;
 	int				player_pos_y;
 	int				player_dir;
+	t_player		player;
 }	t_data;
 
 		/* Parser file name */
@@ -152,5 +198,11 @@ int		key_press(int keycode, t_data *data);
 int		key_release(int keycode, t_data *data);
 int		close_window(t_data *data);
 void	ft_destroy_mlx(t_data *data);
+
+		/* Draw */
+int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
+void	my_pixel_put(t_img *img, int x, int y, int color);
+int		render_rectanlge(t_img *img, t_rect rect);
+int		render(t_data *data);
 
 #endif //CUB3D_H

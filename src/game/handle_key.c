@@ -21,7 +21,7 @@ int	key_release(int keycode, t_data *data)
 int	key_press(int keycode, t_data *data)
 {
 	data->keys[keycode] = 1;
-	if (keycode == ESC)
+	if (keycode == KEY_ECHAP)
 		ft_destroy_mlx(data);
 	return (0);
 }

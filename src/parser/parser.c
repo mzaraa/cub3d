@@ -27,6 +27,8 @@ void	parser(t_data *data, char *file_name)
 		parse_raw_map(data, fd);
 		check_map(data);
 		fill_map(data);
+		data->map_height = ft_lstsize(data->map_list);
+		data->map_width = ft_strlen(data->map_list->content);
 	}
 	else
 	{
