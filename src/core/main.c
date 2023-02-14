@@ -21,40 +21,41 @@ void	init_data(t_data *data)
 	data->all_id_present = 63;
 	data->map_list = NULL;
 	ft_memset(data->keys, 0, sizeof(char) * 512);
+	data->ray.camera_x = 0;
+	set_vector_i(&data->ray.map, 0, 0);
+	data->ray.perp_wall_dist = 0;
+	set_vector_i(&data->ray.step, 0, 0);
+	data->ray.hit = 0;
+	data->ray.side = 0;
+	data->ray.x = 0;
+	data->window_width = WINDOW_WIDTH;
+	data->window_height = WINDOW_HEIGHT;
+	data->ray.draw_start = 0;
+	data->ray.draw_end = 0;
+	data->ray.line_height = 0;
 }
 
 void	init_player(t_data *data)
 {
-	data->player.x = data->player_pos_x + 0.5;
-	data->player.y = data->player_pos_y + 0.5;
+	set_vector_d(&data->player.pos, data->player_pos_x + 0.5, data->player_pos_y + 0.5);
+	data->player.move_speed = 0.0005;
+	data->player.rot_speed = 0.0005;
 	if (data->player_dir == 'N')
-	{
-		data->player.dir_x = 0;
-		data->player.dir_y = 1;
-		data->player.plane_x = 0.66;
-		data->player.plane_y = 0;
-	}
+		set_vector_d(&data->player.dir, 0, -1); // y-1
 	else if (data->player_dir == 'S')
-	{
-		data->player.dir_x = 0;
-		data->player.dir_y = -1;
-		data->player.plane_x = -0.66;
-		data->player.plane_y = 0;
-	}
+		set_vector_d(&data->player.dir, 0, 1); // y+1
 	else if (data->player_dir == 'E')
-	{
-		data->player.dir_x = 1;
-		data->player.dir_y = 0;
-		data->player.plane_x = 0;
-		data->player.plane_y = 0.66;
-	}
+		set_vector_d(&data->player.dir, 1, 0); // x+1
 	else if (data->player_dir == 'W')
-	{
-		data->player.dir_x = -1;
-		data->player.dir_y = 0;
-		data->player.plane_x = 0;
-		data->player.plane_y = -0.66;
-	}
+		set_vector_d(&data->player.dir, -1, 0); // x-1
+	if (data->player_dir == 'N')
+		set_vector_d(&data->player.plane, 0.66, 0); // x+0.66
+	else if (data->player_dir == 'S')
+		set_vector_d(&data->player.plane, -0.66, 0); // x-0.66
+	else if (data->player_dir == 'E')
+		set_vector_d(&data->player.plane, 0, 0.66); // y+0.66
+	else if (data->player_dir == 'W')
+		set_vector_d(&data->player.plane, 0, -0.66); // y-0.66
 }
 
 int	main(int ac, char **av)

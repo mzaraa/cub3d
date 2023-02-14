@@ -5,9 +5,6 @@ LIBS		:= ft
 LIBS_TARGET :=	\
 	lib/libft/libft.a		\
 
-MINILIBX_DIR = mlx/
-MINILIBX = libmlx.dylib
-
 
 INCS		:= \
 	include					\
@@ -30,6 +27,9 @@ SRCS		:=	\
 	utils/usefull_func.c \
 	game/run_game.c \
 	game/handle_key.c \
+	game/render.c \
+	game/math_utils.c \
+	game/raycast.c \
 #	initialization/fill_map.c \
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
@@ -53,22 +53,18 @@ libft:
 	@$(MAKE) -C lib/libft
 
 $(NAME): $(OBJS) $(LIBS_TARGET)
-	@make -C $(MINILIBX_DIR)
-	@$(CC) $(LDFLAGS) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit $(LDLIBS) -o $(NAME)
+	@$(CC) $(LDFLAGS) $(OBJS) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz $(LDLIBS) -o $(NAME)
 	$(info CREATED $(NAME))
-	@cp -rf $(MINILIBX_DIR)$(MINILIBX) .
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(DIR_DUP)
-	@$(CC) $(CFLAGS) -Imlx $(CPPFLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -I/usr/include -Imlx_linux -O3 -c -o $@ $<
 	$(info CREATED $@)
 
 -include $(DEPS)
 
 clean:
 	@for f in $(dir $(LIBS_TARGET)); do $(MAKE) -C $$f clean; done
-	rm -f $(OBJ) $(MINILIBX)
-	make clean -C $(MINILIBX_DIR)
 	@$(RM) $(OBJS) $(DEPS)
 
 fclean: clean

@@ -31,27 +31,24 @@ int render_rectangle(t_img *img, t_rect rect)
 
 int	render(t_data *data)
 {
-	int i = 0;
-	int j = 0;
-	int ratio = 0;
-
+	int r;
+	int g;
+	int b;
+	ft_memset(data->img.addr, 0, data->img.line_length * data->img.height);
+	key_manager(data);
+	r = data->id_tab[F].info_rgb[0];
+	g = data->id_tab[F].info_rgb[1];
+	b = data->id_tab[F].info_rgb[2];
 	if (data->win_ptr == NULL)
 		return (1);
-	// compute the perimeter of the rectangle for each value of the map with the size of the window and the size of the map
-	ratio = (WINDOW_WIDTH / data->map_width) < (WINDOW_HEIGHT / data->map_height) ? (WINDOW_WIDTH / data->map_width) : (WINDOW_HEIGHT / data->map_height);
-	// draw the map with 1 = red and 0 = green and NSEW = blue
-	while ( i < data->map_height)
-	{
-		j = 0;
-		while (j < data->map_width)
-		{
-			if (data->map[i][j] == '1')
-				render_rectangle(&data->img, (t_rect){j * ratio, i * ratio, ratio-1, ratio-1, RED_PIXEL});
-			else
-				render_rectangle(&data->img, (t_rect){j * ratio, i * ratio, ratio-1, ratio-1, GREEN_PIXEL});
-			j++;
-		}
-		i++;
-	}
+	// draw the background
+	render_rectangle(&data->img, (t_rect){0, 0, WINDOW_WIDTH, WINDOW_HEIGHT/2, encode_rgb(r, g, b)});
+	r = data->id_tab[C].info_rgb[0];
+	g = data->id_tab[C].info_rgb[1];
+	b = data->id_tab[C].info_rgb[2];
+	render_rectangle(&data->img, (t_rect){0, WINDOW_HEIGHT/2, WINDOW_WIDTH, WINDOW_HEIGHT/2, encode_rgb(r, g, b)});
+	raycast(data);
+	data->ray.x = 0;
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	return (0);
 }

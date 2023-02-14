@@ -20,12 +20,11 @@
 # include <mlx.h>
 
 # define WHITESPACE " \t\n\v\f\r"
-# define WINDOW_WIDTH 800
-# define WINDOW_HEIGHT 800
+# define WINDOW_WIDTH 600
+# define WINDOW_HEIGHT 380
 
 # define RED_PIXEL 0xFF0000
 # define GREEN_PIXEL 0xFF00
-# define WHITE_PIXEL 0xFFFFFF
 # define BLUE_PIXEL 0xFF
 
 /*
@@ -65,32 +64,42 @@ typedef struct s_rect
 	int color;
 }	t_rect;
 
-typedef struct s_player
+typedef struct s_vector_d
 {
 	double	x;
 	double	y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
+}	t_vector_d;
+
+typedef struct s_vector_i
+{
+	int	x;
+	int	y;
+}	t_vector_i;
+
+typedef struct s_player
+{
+	t_vector_d	pos;
+	t_vector_d	dir;
+	t_vector_d	plane;
+	double	move_speed;
+	double	rot_speed;
 }	t_player;
 
 typedef struct s_ray
 {
-	double	camera_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	int		map_x;
-	int		map_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	perp_wall_dist;
-	int		step_x;
-	int		step_y;
-	int		hit;
-	int		side;
+	t_vector_d	ray_dir;
+	t_vector_d	side_dist;
+	t_vector_d	delta_dist;
+	t_vector_i	map;
+	t_vector_i	step;
+	double		camera_x;
+	double		perp_wall_dist;
+	int			hit;
+	int			side;
+	int 		x;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
 }	t_ray;
 
 /*
@@ -164,7 +173,10 @@ typedef struct s_data
 	int				player_pos_x;
 	int				player_pos_y;
 	int				player_dir;
+	double			window_width;
+	double			window_height;
 	t_player		player;
+	t_ray			ray;
 }	t_data;
 
 		/* Parser file name */
@@ -204,5 +216,14 @@ int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 void	my_pixel_put(t_img *img, int x, int y, int color);
 int		render_rectanlge(t_img *img, t_rect rect);
 int		render(t_data *data);
+void	raycast(t_data *data);
+void	draw_wall(t_data *data);
+void	key_manager(t_data *data);
+
+		/* Vector */
+void	set_vector_d(t_vector_d *vector, double x, double y);
+void	set_vector_i(t_vector_i *vector, int x, int y);
+void	rotate_vector(t_vector_d *vector, double rotspeed);
+
 
 #endif //CUB3D_H

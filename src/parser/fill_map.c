@@ -80,6 +80,7 @@ void	check_pos_player(t_data *data)
 				data->player_pos_x = j;
 				data->player_pos_y = i;
 				data->player_dir = data->map[i][j];
+				data->map[i][j] = '0';
 				count++;
 			}
 			if (count > 1)
