@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:43:51 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/06 15:12:51 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/18 15:13:54 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ typedef struct s_rect
 {
 	int	x;
 	int	y;
-	int width;
-	int height;
-	int color;
+	int	width;
+	int	height;
+	int	color;
 }	t_rect;
 
 typedef struct s_vector_d
@@ -82,8 +82,8 @@ typedef struct s_player
 	t_vector_d	pos;
 	t_vector_d	dir;
 	t_vector_d	plane;
-	double	move_speed;
-	double	rot_speed;
+	double		move_speed;
+	double		rot_speed;
 }	t_player;
 
 typedef struct s_ray
@@ -97,7 +97,7 @@ typedef struct s_ray
 	double		perp_wall_dist;
 	int			hit;
 	int			side;
-	int 		x;
+	int			x;
 	int			line_height;
 	int			draw_start;
 	int			draw_end;
@@ -137,7 +137,7 @@ typedef struct s_img
 	char	*addr;
 	int		width;
 	int		height;
-	int		bpp; // bits per pixel, when divided by 8 gives the number of bytes per pixel
+	int		bpp;
 	int		line_length;
 	int		endian;
 }	t_img;
@@ -151,6 +151,18 @@ typedef struct s_img
 **		=> identifier present in the .cub file that i alread parsed
 **		=> bitwise operation to check if the identifier is present 1 or not 0
 **		all_id_present: represent the value if all identifier are present
+**		flag_error: represent the error code
+**		keys: array of char used to store the key pressed
+**		line_gnl: store the line read by get_next_line
+**		map: store the map in a 2D array of char
+**		map_list: store the map in a linked list of char*
+**		longest_line: store the longest line size of the map
+**		flag_map_start: flag to know if the map start
+**		map_width: store the width of the map
+**		map_height: store the height of the map
+**		player_pos_x: store the x position of the player
+**		player_pos_y: store the y position of the player
+**		player_dir: store the direction of the player (N, S, E, W)
 */
 typedef struct s_data
 {
@@ -227,6 +239,5 @@ void	set_vector_d(t_vector_d *vector, double x, double y);
 void	set_vector_i(t_vector_i *vector, int x, int y);
 void	rotate_vector(t_vector_d *vector, double rotspeed);
 int		check_wall_dir(t_data *data);
-
 
 #endif //CUB3D_H

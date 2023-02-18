@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:43:36 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/06 14:01:00 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/18 10:08:34 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,26 @@ void	init_data(t_data *data)
 
 void	init_player(t_data *data)
 {
-	set_vector_d(&data->player.pos, data->player_pos_x + 0.5, data->player_pos_y + 0.5);
+	set_vector_d(&data->player.pos, data->player_pos_x + 0.5, \
+		data->player_pos_y + 0.5);
 	data->player.move_speed = 0.05;
 	data->player.rot_speed = 0.05;
 	if (data->player_dir == 'N')
-		set_vector_d(&data->player.dir, 0, -1); // y-1
+		set_vector_d(&data->player.dir, 0, -1);
 	else if (data->player_dir == 'S')
-		set_vector_d(&data->player.dir, 0, 1); // y+1
+		set_vector_d(&data->player.dir, 0, 1);
 	else if (data->player_dir == 'E')
-		set_vector_d(&data->player.dir, 1, 0); // x+1
+		set_vector_d(&data->player.dir, 1, 0);
 	else if (data->player_dir == 'W')
-		set_vector_d(&data->player.dir, -1, 0); // x-1
+		set_vector_d(&data->player.dir, -1, 0);
 	if (data->player_dir == 'N')
-		set_vector_d(&data->player.plane, 0.66, 0); // x+0.66
+		set_vector_d(&data->player.plane, 0.66, 0);
 	else if (data->player_dir == 'S')
-		set_vector_d(&data->player.plane, -0.66, 0); // x-0.66
+		set_vector_d(&data->player.plane, -0.66, 0);
 	else if (data->player_dir == 'E')
-		set_vector_d(&data->player.plane, 0, 0.66); // y+0.66
+		set_vector_d(&data->player.plane, 0, 0.66);
 	else if (data->player_dir == 'W')
-		set_vector_d(&data->player.plane, 0, -0.66); // y-0.66
+		set_vector_d(&data->player.plane, 0, -0.66);
 }
 
 int	main(int ac, char **av)

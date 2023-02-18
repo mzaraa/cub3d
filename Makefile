@@ -30,6 +30,7 @@ SRCS		:=	\
 	game/render.c \
 	game/math_utils.c \
 	game/raycast.c \
+	game/draw.c \
 #	initialization/fill_map.c \
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
@@ -53,12 +54,12 @@ libft:
 	@$(MAKE) -C lib/libft
 
 $(NAME): $(OBJS) $(LIBS_TARGET)
-	@$(CC) $(LDFLAGS) $(OBJS) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz $(LDLIBS) -o $(NAME)
+	@$(CC) $(LDFLAGS) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit  $(LDLIBS) -o $(NAME)
 	$(info CREATED $(NAME))
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(DIR_DUP)
-	@$(CC) $(CFLAGS) $(CPPFLAGS) -I/usr/include -Imlx_linux -O3 -c -o $@ $<
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -I/usr/include -Imlx -O3 -c -o $@ $<
 	$(info CREATED $@)
 
 -include $(DEPS)

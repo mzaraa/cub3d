@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/18 10:04:40 by mzaraa            #+#    #+#             */
+/*   Updated: 2023/02/18 14:48:04 by mzaraa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
-void dda(t_data *data)
+void	dda(t_data *data)
 {
 	data->ray.hit = 0;
 	while (data->ray.hit == 0)
@@ -23,7 +34,7 @@ void dda(t_data *data)
 	}
 }
 
-void set_step(t_data *data)
+void	set_step(t_data *data)
 {
 	set_vector_i(&data->ray.step, 0, 0);
 	if (data->ray.ray_dir.x < 0)
@@ -48,7 +59,7 @@ void set_step(t_data *data)
 	}
 }
 
-void set_delta_dist(t_data *data)
+void	set_delta_dist(t_data *data)
 {
 	set_vector_d(&data->ray.delta_dist, 0, 0);
 	if (data->ray.ray_dir.x == 0)
@@ -61,7 +72,7 @@ void set_delta_dist(t_data *data)
 		data->ray.delta_dist.y = fabs(1 / data->ray.ray_dir.y);
 }
 
-void raycast(t_data *data)
+void	raycast(t_data *data)
 {
 	while (data->ray.x < data->window_width)
 	{
@@ -70,18 +81,18 @@ void raycast(t_data *data)
 		set_vector_i(&data->ray.map, 0, 0);
 		data->ray.side = 0;
 		data->ray.camera_x = 2 * data->ray.x / (double)data->window_width - 1;
-		set_vector_d(&data->ray.ray_dir, 
-			data->player.dir.x + data->player.plane.x * data->ray.camera_x, 
+		set_vector_d(&data->ray.ray_dir, \
+			data->player.dir.x + data->player.plane.x * data->ray.camera_x, \
 				data->player.dir.y + data->player.plane.y * data->ray.camera_x);
 		set_vector_i(&data->ray.map, (int)data->player.pos.x, (int)data->player.pos.y);
 		set_delta_dist(data);
 		set_step(data);
 		dda(data);
-		if (data->ray.side == 0)
-			data->ray.perp_wall_dist = (data->ray.side_dist.x - data->ray.delta_dist.x);
-		else
-			data->ray.perp_wall_dist = (data->ray.side_dist.y - data->ray.delta_dist.y);
 		data->test = check_wall_dir(data);
+		if (data->ray.side == 0)
+			data->ray.perp_wall_dist = (data->ray.map.x - data->player.pos.x + (1 - data->ray.step.x) / 2) / data->ray.ray_dir.x;
+		else
+			data->ray.perp_wall_dist = (data->ray.map.y - data->player.pos.y + (1 - data->ray.step.y) / 2) / data->ray.ray_dir.y;
 		draw_wall(data);
 		data->ray.x++;
 	}
