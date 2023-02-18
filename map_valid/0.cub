@@ -1,10 +1,10 @@
 
-NO ./textures_xpm/naturalbricks_hd_verydark.xpm
-SO ./textures_xpm/naturalbricks_hd_verydark.xpm
-EA ./textures_xpm/naturalbricks_hd_verydark.xpm
-WE ./textures_xpm/naturalbricks_hd_verydark.xpm
+NO ./xpm/redbrick.xpm
+SO ./grey_cub.xpm
+EA ./xpm/redbrick.xpm
+WE ./xpm/redbrick.xpm
 
-C 155,100,160
+C 255,100,160
 F 111,111,111
 
 11111111111111111

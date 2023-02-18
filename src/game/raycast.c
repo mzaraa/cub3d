@@ -69,26 +69,19 @@ void raycast(t_data *data)
 		set_vector_i(&data->ray.step, 0, 0);
 		set_vector_i(&data->ray.map, 0, 0);
 		data->ray.side = 0;
-		// calculate ray position and direction
 		data->ray.camera_x = 2 * data->ray.x / (double)data->window_width - 1;
 		set_vector_d(&data->ray.ray_dir, 
 			data->player.dir.x + data->player.plane.x * data->ray.camera_x, 
 				data->player.dir.y + data->player.plane.y * data->ray.camera_x);
-		//printf("ray_dir.x = %f, ray_dir.y = %f\n", data->ray.ray_dir.x, data->ray.ray_dir.y);
 		set_vector_i(&data->ray.map, (int)data->player.pos.x, (int)data->player.pos.y);
-		// printf("map.x = %d, map.y = %d\n", data->ray.map.x, data->ray.map.y);
-		// calculate step and initial sideDist
-		// printf("delta_dist.x = %f, delta_dist.y = %f\n", data->ray.delta_dist.x, data->ray.delta_dist.y);
 		set_delta_dist(data);
-		//printf("delta_dist.x = %f, delta_dist.y = %f\n", data->ray.delta_dist.x, data->ray.delta_dist.y);
 		set_step(data);
-		// perform DDA
 		dda(data);
-		// calculate distance projected on camera direction (oblique distance will give fisheye effect!)
 		if (data->ray.side == 0)
 			data->ray.perp_wall_dist = (data->ray.side_dist.x - data->ray.delta_dist.x);
 		else
 			data->ray.perp_wall_dist = (data->ray.side_dist.y - data->ray.delta_dist.y);
+		data->test = check_wall_dir(data);
 		draw_wall(data);
 		data->ray.x++;
 	}

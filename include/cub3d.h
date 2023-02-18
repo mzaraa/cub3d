@@ -26,6 +26,7 @@
 # define RED_PIXEL 0xFF0000
 # define GREEN_PIXEL 0xFF00
 # define BLUE_PIXEL 0xFF
+# define YELLOW_PIXEL 0xFFFF00
 
 /*
 ** Represent the identifier of the elements in the .cub file
@@ -157,6 +158,7 @@ typedef struct s_data
 	void			*win_ptr;
 	t_img			img;
 	t_img			tex_img[4];
+	int				test;
 	t_elements		*id_tab;
 	size_t			state;
 	size_t			present_id;
@@ -224,6 +226,7 @@ void	key_manager(t_data *data);
 void	set_vector_d(t_vector_d *vector, double x, double y);
 void	set_vector_i(t_vector_i *vector, int x, int y);
 void	rotate_vector(t_vector_d *vector, double rotspeed);
+int		check_wall_dir(t_data *data);
 
 
 #endif //CUB3D_H

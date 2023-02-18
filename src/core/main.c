@@ -38,8 +38,8 @@ void	init_data(t_data *data)
 void	init_player(t_data *data)
 {
 	set_vector_d(&data->player.pos, data->player_pos_x + 0.5, data->player_pos_y + 0.5);
-	data->player.move_speed = 0.0005;
-	data->player.rot_speed = 0.0005;
+	data->player.move_speed = 0.05;
+	data->player.rot_speed = 0.05;
 	if (data->player_dir == 'N')
 		set_vector_d(&data->player.dir, 0, -1); // y-1
 	else if (data->player_dir == 'S')

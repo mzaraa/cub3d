@@ -1,6 +1,37 @@
 
 #include "cub3d.h"
 
+/* 
+int	check_wall_dir(t_data *data)
+{
+	if (data->ray.side == 0)
+	{
+		if (data->ray.map.y < data->player.pos.y)
+			return (NO);
+		else
+			return (SO);
+	}
+	else
+	{
+		if (data->ray.map.x < data->player.pos.x)
+			return (WE);
+		else
+			return (EA);
+	}
+}
+*/
+
+int	check_wall_dir(t_data *data)
+{
+	if (data->ray.side == 0 && data->ray.ray_dir.x < 0)
+		return (NO);
+	else if (data->ray.side == 0 && data->ray.ray_dir.x > 0)
+		return (SO);
+	else if (data->ray.side == 1 && data->ray.ray_dir.y < 0)
+		return (WE);
+	return (EA);
+}
+
 void set_vector_d(t_vector_d *vector, double x, double y)
 {
 	vector->x = x;
