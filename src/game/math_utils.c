@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:05:23 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/18 13:36:35 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/19 15:03:51 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ int	check_wall_dir(t_data *data)
 
 int	check_wall_dir(t_data *data)
 {
-	if (data->ray.side == 0 && data->ray.ray_dir.x < 0)
-		return (NO);
-	else if (data->ray.side == 0 && data->ray.ray_dir.x > 0)
-		return (SO);
-	else if (data->ray.side == 1 && data->ray.ray_dir.y < 0)
+	if (data->ray.side == 0 && data->ray.map.x < data->player.pos.x)
 		return (WE);
-	else if (data->ray.side == 1 && data->ray.ray_dir.y > 0)
+	else if (data->ray.side == 0 && data->ray.map.x > data->player.pos.x)
 		return (EA);
+	else if (data->ray.side == 1 && data->ray.map.y < data->player.pos.y)
+		return (NO);
+	else if (data->ray.side == 1 && data->ray.map.y > data->player.pos.y)
+		return (SO);
 	return (0);
 }
 

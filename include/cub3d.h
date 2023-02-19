@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:43:51 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/18 15:13:54 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/19 17:13:27 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <mlx.h>
 
 # define WHITESPACE " \t\n\v\f\r"
-# define WINDOW_WIDTH 600
-# define WINDOW_HEIGHT 380
+# define WIDTH 600
+# define HEIGHT 380
 
 # define RED_PIXEL 0xFF0000
 # define GREEN_PIXEL 0xFF00
@@ -90,17 +90,17 @@ typedef struct s_ray
 {
 	t_vector_d	ray_dir;
 	t_vector_d	side_dist;
-	t_vector_d	delta_dist;
+	t_vector_d	delta;
 	t_vector_i	map;
 	t_vector_i	step;
 	double		camera_x;
-	double		perp_wall_dist;
+	double		pwd; //perpendicular wall distance
 	int			hit;
 	int			side;
 	int			x;
-	int			line_height;
-	int			draw_start;
-	int			draw_end;
+	int			l_height;
+	int			draw_s;
+	int			draw_e;
 }	t_ray;
 
 /*
@@ -160,8 +160,8 @@ typedef struct s_img
 **		flag_map_start: flag to know if the map start
 **		map_width: store the width of the map
 **		map_height: store the height of the map
-**		player_pos_x: store the x position of the player
-**		player_pos_y: store the y position of the player
+**		ppx: store the x position of the player
+**		ppy: store the y position of the player
 **		player_dir: store the direction of the player (N, S, E, W)
 */
 typedef struct s_data
@@ -171,6 +171,7 @@ typedef struct s_data
 	t_img			img;
 	t_img			tex_img[4];
 	int				test;
+	int				**tex;
 	t_elements		*id_tab;
 	size_t			state;
 	size_t			present_id;
@@ -184,8 +185,8 @@ typedef struct s_data
 	int				flag_map_start;
 	int				map_width;
 	int				map_height;
-	int				player_pos_x;
-	int				player_pos_y;
+	int				ppx; //player position x
+	int				ppy; //player position y
 	int				player_dir;
 	double			window_width;
 	double			window_height;
@@ -209,6 +210,7 @@ void	error_empty_line(t_data *data, char *line);
 void	parse_raw_map(t_data *data, int fd);
 void	check_map(t_data *data);
 void	fill_map(t_data *data);
+int		cell_surrounded(t_data *data, int i, int j);
 
 		/* Utils */
 int		ft_exit_program(t_data *data, char *s);

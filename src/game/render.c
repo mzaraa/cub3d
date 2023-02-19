@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:05:38 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/18 15:18:44 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/19 17:00:59 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,15 @@ int	render(t_data *data)
 	b = data->id_tab[F].info_rgb[2];
 	if (data->win_ptr == NULL)
 		return (1);
-	render_rectangle(&data->img, (t_rect){0, 0, WINDOW_WIDTH, WINDOW_HEIGHT / 2, encode_rgb(r, g, b)});
+	render_rectangle(&data->img, (t_rect){0, 0, WIDTH, HEIGHT / 2, \
+		encode_rgb(r, g, b)});
 	r = data->id_tab[C].info_rgb[0];
 	g = data->id_tab[C].info_rgb[1];
 	b = data->id_tab[C].info_rgb[2];
-	render_rectangle(&data->img, (t_rect){0, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT / 2, encode_rgb(r, g, b)});
+	render_rectangle(&data->img, (t_rect){0, HEIGHT / 2, WIDTH, HEIGHT / 2, \
+		encode_rgb(r, g, b)});
 	raycast(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, \
+		0);
 	return (0);
 }

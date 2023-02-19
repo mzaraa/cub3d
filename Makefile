@@ -54,7 +54,7 @@ libft:
 	@$(MAKE) -C lib/libft
 
 $(NAME): $(OBJS) $(LIBS_TARGET)
-	@$(CC) $(LDFLAGS) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit  $(LDLIBS) -o $(NAME)
+	@$(CC) $(LDFLAGS) $(OBJS) -lmlx -framework OpenGL -framework AppKit  $(LDLIBS) -o $(NAME)
 	$(info CREATED $(NAME))
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c

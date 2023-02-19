@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:43:36 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/18 10:08:34 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/19 17:16:52 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	init_data(t_data *data)
 {
 	ft_memset(data, 0, sizeof(t_data));
 	data->id_tab = malloc(sizeof(t_elements) * TOTAL);
+	data->tex = malloc(sizeof(int *) * 4);
 	ft_memset(data->id_tab, 0, sizeof(t_elements) * TOTAL);
 	data->state = PARSING;
 	data->all_id_present = 63;
@@ -23,22 +24,22 @@ void	init_data(t_data *data)
 	ft_memset(data->keys, 0, sizeof(char) * 512);
 	data->ray.camera_x = 0;
 	set_vector_i(&data->ray.map, 0, 0);
-	data->ray.perp_wall_dist = 0;
+	data->ray.pwd = 0;
 	set_vector_i(&data->ray.step, 0, 0);
 	data->ray.hit = 0;
 	data->ray.side = 0;
 	data->ray.x = 0;
-	data->window_width = WINDOW_WIDTH;
-	data->window_height = WINDOW_HEIGHT;
-	data->ray.draw_start = 0;
-	data->ray.draw_end = 0;
-	data->ray.line_height = 0;
+	data->window_width = WIDTH;
+	data->window_height = HEIGHT;
+	data->ray.draw_s = 0;
+	data->ray.draw_e = 0;
+	data->ray.l_height = 0;
 }
 
 void	init_player(t_data *data)
 {
-	set_vector_d(&data->player.pos, data->player_pos_x + 0.5, \
-		data->player_pos_y + 0.5);
+	set_vector_d(&data->player.pos, data->ppx + 0.5, \
+		data->ppy + 0.5);
 	data->player.move_speed = 0.05;
 	data->player.rot_speed = 0.05;
 	if (data->player_dir == 'N')
@@ -76,20 +77,3 @@ int	main(int ac, char **av)
 	ft_exit_program(data, "Success");
 	return (0);
 }
-	// print data file
-
-	// int i = 0;
-	// while (i < 6)
-	// {
-	// 	if (i < 4 && data->id_tab[i].info_tex != NULL)
-	// 		printf("%s\n", data->id_tab[i].info_tex);
-	// 	else if (data->id_tab[i].info_rgb != NULL)
-	// 	printf("%d %d %d\n", data->id_tab[i].info_rgb[0], 
-	// data->id_tab[i].info_rgb[1], data->id_tab[i].info_rgb[2]);
-	// 	i++;
-	// }
-	// while (data->map_list)
-	// {
-	// 	printf("%s", data->map_list->content);
-	// 	data->map_list = data->map_list->next;
-	// }

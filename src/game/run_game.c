@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:06:54 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/18 15:12:26 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/19 17:07:31 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ void	init_xpm(t_data *data)
 {
 	t_img	*img;
 	int		i;
+	int		j;
 
 	i = 0;
 	while (i < 4)
 	{
+		j = 0;
 		img = &data->tex_img[i];
 		img->mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, \
 			data->id_tab[i].info_tex, &img->width, &img->height);
@@ -36,6 +38,12 @@ void	init_xpm(t_data *data)
 			&img->line_length, &img->endian);
 		if (!img->addr)
 			ft_exit_program(data, "Error\nmlx_get_data_addr() failed");
+		data->tex[i] = malloc(sizeof(int) * img->width * img->height);
+		while (j < img->width * img->height)
+		{
+			data->tex[i][j] = ((int *)img->addr)[j];
+			j++;
+		}
 		i++;
 	}
 }
@@ -45,14 +53,15 @@ void	run_game(t_data *data)
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		ft_exit_program(data, "Error\nmlx_init() failed");
-	data->win_ptr = mlx_new_window(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D");
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "Cub3D");
 	if (!data->win_ptr)
 		ft_exit_program(data, "Error\nmlx_new_window() failed");
 	init_xpm(data);
-	data->img.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	data->img.mlx_img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	if (!data->img.mlx_img)
 		ft_exit_program(data, "Error\nmlx_new_image() failed");
-	data->img.addr = mlx_get_data_addr(data->img.mlx_img, &data->img.bpp, &data->img.line_length, &data->img.endian);
+	data->img.addr = mlx_get_data_addr(data->img.mlx_img, &data->img.bpp, \
+		&data->img.line_length, &data->img.endian);
 	if (!data->img.addr)
 		ft_exit_program(data, "Error\nmlx_get_data_addr() failed");
 	mlx_loop_hook(data->mlx_ptr, &render, data);

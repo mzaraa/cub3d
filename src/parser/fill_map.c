@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 10:31:04 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/28 18:29:17 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/19 17:13:46 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	check_player_inside_map(t_data *data)
 		data->map = NULL;
 		ft_exit_program(data, "Error\nNeed to have player inside the map");
 	}
-	if (((data->player_pos_y - 1 >= 0 \
-	&& data->player_pos_y + 1 < ft_lstsize(data->map_list)) \
-	&& (data->player_pos_x - 1 >= 0 \
-	&& data->player_pos_x + 1 < (int)ft_strlen(data->map[data->player_pos_y]))) \
-	&& ft_strchr("01", data->map[data->player_pos_y - 1][data->player_pos_x]) \
-	&& ft_strchr("01", data->map[data->player_pos_y + 1][data->player_pos_x]) \
-	&& ft_strchr("01", data->map[data->player_pos_y][data->player_pos_x - 1]) \
-	&& ft_strchr("01", data->map[data->player_pos_y][data->player_pos_x + 1]))
+	if (((data->ppy - 1 >= 0 \
+	&& data->ppy + 1 < ft_lstsize(data->map_list)) \
+	&& (data->ppx - 1 >= 0 \
+	&& data->ppx + 1 < (int)ft_strlen(data->map[data->ppy]))) \
+	&& ft_strchr("01", data->map[data->ppy - 1][data->ppx]) \
+	&& ft_strchr("01", data->map[data->ppy + 1][data->ppx]) \
+	&& ft_strchr("01", data->map[data->ppy][data->ppx - 1]) \
+	&& ft_strchr("01", data->map[data->ppy][data->ppx + 1]))
 	{
 		return ;
 	}
@@ -50,10 +50,7 @@ void	check_map_closed(t_data *data)
 		{
 			if (data->map[i][j] == '0')
 			{
-				if ((!((i - 1) >= 0) || !ft_strchr("01NEWS", data->map[i - 1][j])) \
-					|| (!((i + 1) < (int)ft_lstsize(data->map_list)) || !ft_strchr("01NEWS", data->map[i + 1][j])) \
-					|| (!((j - 1) >= 0) || !ft_strchr("01NEWS", data->map[i][j - 1])) \
-					|| (!((j + 1) <= (int)data->longest_line) || !ft_strchr("01NEWS", data->map[i][j + 1])))
+				if (cell_surrounded(data, i, j))
 				{
 					ft_exit_program(data, "Error\nMap not closed");
 				}
@@ -77,8 +74,8 @@ void	check_pos_player(t_data *data)
 		{
 			if (ft_strchr("NSEW", data->map[i][j]))
 			{
-				data->player_pos_x = j;
-				data->player_pos_y = i;
+				data->ppx = j;
+				data->ppy = i;
 				data->player_dir = data->map[i][j];
 				data->map[i][j] = '0';
 				count++;

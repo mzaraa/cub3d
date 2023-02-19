@@ -1,7 +1,7 @@
 
-NO ./xpm/redbrick.xpm
-SO ./grey_cub.xpm
-EA ./xpm/redbrick.xpm
+NO ./grey_cub.xpm
+SO ./xpm/bluestone.xpm
+EA ./xpm/colorstone.xpm
 WE ./xpm/redbrick.xpm
 
 C 255,100,160
@@ -10,7 +10,7 @@ F 111,111,111
 11111111111111111
 10000000000000001
 10100000100000101
-100000000N0000001
+100000000E0000001
 10001000000010001
 10000000000000001
 10101010001010101
