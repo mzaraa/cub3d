@@ -35,19 +35,18 @@ int	close_window(t_data *data)
 
 void	key_manager_bis(t_data *data)
 {
-	static double s = 0.00000001;
-	data->player.rot_speed += s;
+	// static double s = 0.00000001;
 	if (data->keys[KEY_D])
 	{
-		rotate_vector(&data->player.dir, data->player.rot_speed);
-		rotate_vector(&data->player.plane, data->player.rot_speed);
+		rotate_vector(&data->player.dir, data->player.rot_speed / 20);
+		rotate_vector(&data->player.plane, data->player.rot_speed / 20);
 	}
 	if (data->keys[KEY_A])
 	{
-		rotate_vector(&data->player.dir, -data->player.rot_speed);
-		rotate_vector(&data->player.plane, -data->player.rot_speed);
+		rotate_vector(&data->player.dir, -data->player.rot_speed / 20);
+		rotate_vector(&data->player.plane, -data->player.rot_speed / 20);
 	}
-	s+=0.0000001;
+	// s+=0.0000001;
 }
 
 void	key_manager(t_data *data)

@@ -84,7 +84,7 @@ void	raycast(t_data *data)
 		set_vector_i(&data->ray.step, 0, 0);
 		set_vector_i(&data->ray.map, 0, 0);
 		data->ray.side = 0;
-		data->ray.camera_x = 2 * data->ray.x / (double)data->window_width - 1;
+		data->ray.camera_x = 2 * data->ray.x / (double)data->window_width - 1; 
 		set_vector_d(&data->ray.ray_dir, \
 			data->player.dir.x + data->player.plane.x * data->ray.camera_x, \
 				data->player.dir.y + data->player.plane.y * data->ray.camera_x);
@@ -98,6 +98,12 @@ void	raycast(t_data *data)
 			data->ray.pwd = (data->ray.side_dist.x - data->ray.delta.x);
 		else
 			data->ray.pwd = (data->ray.side_dist.y - data->ray.delta.y);
+		// position x and y of the end of the ray on the map (double)
+		data->rays_coords[data->ray.x].x = data->player.pos.x + data->ray.pwd * data->ray.ray_dir.x;
+		data->rays_coords[data->ray.x].y = data->player.pos.y + data->ray.pwd * data->ray.ray_dir.y;
+		printf("sidex: %f sidey: %f data->rays_coords[data->ray.x].x: %f data->rays_coords[data->ray.x].y: %f\n", data->ray.side_dist.x, data->ray.side_dist.y, data->rays_coords[data->ray.x].x, data->rays_coords[data->ray.x].y);
+		exit(1);
+		//printf("side: %f\n", data->ray.side_dist.x);
 		draw_wall(data);
 		data->ray.x++;
 	}

@@ -20,8 +20,8 @@
 # include <mlx.h>
 
 # define WHITESPACE " \t\n\v\f\r"
-# define WIDTH 600
-# define HEIGHT 380
+# define WIDTH 800
+# define HEIGHT 600
 
 # define RED_PIXEL 0xFF0000
 # define GREEN_PIXEL 0xFF00
@@ -52,6 +52,11 @@ enum e_state
 	GAME,
 	STOP
 };
+
+typedef struct s_point {
+	double	x;
+	double	y;
+}	t_point;
 
 /*
 ** Just a simple struct draw the minimap
@@ -170,6 +175,7 @@ typedef struct s_data
 	void			*win_ptr;
 	t_img			img;
 	t_img			tex_img[4];
+	t_vector_d		rays_coords[WIDTH+1];
 	int				test;
 	int				**tex;
 	t_elements		*id_tab;
@@ -230,11 +236,12 @@ void	ft_destroy_mlx(t_data *data);
 		/* Draw */
 int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 void	my_pixel_put(t_img *img, int x, int y, int color);
-int		render_rectanlge(t_img *img, t_rect rect);
+int		render_rectangle(t_img *img, t_rect rect);
 int		render(t_data *data);
 void	raycast(t_data *data);
 void	draw_wall(t_data *data);
 void	key_manager(t_data *data);
+void	minimap(t_data *data);
 
 		/* Vector */
 void	set_vector_d(t_vector_d *vector, double x, double y);
