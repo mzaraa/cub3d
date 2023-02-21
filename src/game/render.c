@@ -55,12 +55,12 @@ int	render(t_data *data)
 	b = data->id_tab[F].info_rgb[2];
 	if (data->win_ptr == NULL)
 		return (1);
-	render_rectangle(&data->img, (t_rect){0, 0, WIDTH, HEIGHT / 2, \
+	render_rectangle(&data->img, (t_rect){0, HEIGHT / 2, WIDTH, HEIGHT / 2, \
 		encode_rgb(r, g, b)});
 	r = data->id_tab[C].info_rgb[0];
 	g = data->id_tab[C].info_rgb[1];
 	b = data->id_tab[C].info_rgb[2];
-	render_rectangle(&data->img, (t_rect){0, HEIGHT / 2, WIDTH, HEIGHT / 2, \
+	render_rectangle(&data->img, (t_rect){0, 0, WIDTH, HEIGHT / 2, \
 		encode_rgb(r, g, b)});
 	raycast(data);
 	minimap(data);

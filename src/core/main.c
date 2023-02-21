@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:43:36 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/19 17:16:52 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/21 12:00:32 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,15 @@ void	init_data(t_data *data)
 	data->ray.draw_s = 0;
 	data->ray.draw_e = 0;
 	data->ray.l_height = 0;
+	data->nb_xpm = 0;
 }
 
 void	init_player(t_data *data)
 {
 	set_vector_d(&data->player.pos, data->ppx + 0.5, \
 		data->ppy + 0.5);
-	data->player.move_speed = 0.005;
-	data->player.rot_speed = 0.05;
+	data->player.move_speed = 0.008;
+	data->player.rot_speed = 0.07;
 	if (data->player_dir == 'N')
 		set_vector_d(&data->player.dir, 0, -1);
 	else if (data->player_dir == 'S')

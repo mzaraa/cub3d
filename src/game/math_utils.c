@@ -12,25 +12,12 @@
 
 #include "cub3d.h"
 
-/* 
-int	check_wall_dir(t_data *data)
+int	max_of(int dx, int dy)
 {
-	if (data->ray.side == 0)
-	{
-		if (data->ray.map.y < data->player.pos.y)
-			return (NO);
-		else
-			return (SO);
-	}
-	else
-	{
-		if (data->ray.map.x < data->player.pos.x)
-			return (WE);
-		else
-			return (EA);
-	}
+	if (dy < dx)
+		return (dx);
+	return (dy);
 }
-*/
 
 int	check_wall_dir(t_data *data)
 {

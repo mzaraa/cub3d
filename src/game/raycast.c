@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:04:40 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/19 17:00:18 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/21 11:52:53 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,13 @@ void	raycast(t_data *data)
 		set_delta(data);
 		set_step(data);
 		dda(data);
-		data->test = check_wall_dir(data);
+		data->tex_to_draw = check_wall_dir(data);
 		if (data->ray.side == 0)
 			data->ray.pwd = (data->ray.side_dist.x - data->ray.delta.x);
 		else
 			data->ray.pwd = (data->ray.side_dist.y - data->ray.delta.y);
-		// position x and y of the end of the ray on the map (double)
 		data->rays_coords[data->ray.x].x = data->player.pos.x + data->ray.pwd * data->ray.ray_dir.x;
 		data->rays_coords[data->ray.x].y = data->player.pos.y + data->ray.pwd * data->ray.ray_dir.y;
-		printf("sidex: %f sidey: %f data->rays_coords[data->ray.x].x: %f data->rays_coords[data->ray.x].y: %f\n", data->ray.side_dist.x, data->ray.side_dist.y, data->rays_coords[data->ray.x].x, data->rays_coords[data->ray.x].y);
-		exit(1);
-		//printf("side: %f\n", data->ray.side_dist.x);
 		draw_wall(data);
 		data->ray.x++;
 	}

@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 14:56:14 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/19 15:25:18 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/21 11:52:53 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ void	draw_wall(t_data *data)
 		data->ray.draw_e = HEIGHT - 1;
 	if (data->map[data->ray.map.y][data->ray.map.x] == '1')
 	{
-		if (data->test == NO)
+		if (data->tex_to_draw == NO)
 			wall_tex(data, NO);
-		else if (data->test == SO)
+		else if (data->tex_to_draw == SO)
 			wall_tex(data, SO);
-		else if (data->test == WE)
+		else if (data->tex_to_draw == WE)
 			wall_tex(data, WE);
-		else if (data->test == EA)
+		else if (data->tex_to_draw == EA)
 			wall_tex(data, EA);
 	}
 }

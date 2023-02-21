@@ -24,4 +24,18 @@
 # define KCYN  "\x1B[36m"
 # define KWHT  "\x1B[37m"
 
+
+# define RED_PIXEL 0xFF0000
+# define GREEN_PIXEL 0xFF00
+# define BLUE_PIXEL 0xFF
+# define YELLOW_PIXEL 0xFFFF00
+# define WHITE_PIXEL 0xFFFFFF
+# define BLACK_PIXEL 0x000000
+# define GREY_PIXEL 0x808080
+# define PURPLE_PIXEL 0x800080
+# define ORANGE_PIXEL 0xFFA500
+# define BROWN_PIXEL 0xA52A2A
+# define PINK_PIXEL 0xFFC0CB
+# define CYAN_PIXEL 0x00FFFF
+
 #endif // COLORS

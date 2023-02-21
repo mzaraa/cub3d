@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:43:51 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/19 17:13:27 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/21 12:26:53 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,9 @@
 # include <mlx.h>
 
 # define WHITESPACE " \t\n\v\f\r"
-# define WIDTH 800
-# define HEIGHT 600
-
-# define RED_PIXEL 0xFF0000
-# define GREEN_PIXEL 0xFF00
-# define BLUE_PIXEL 0xFF
-# define YELLOW_PIXEL 0xFFFF00
+# define WIDTH 1280
+# define HEIGHT 720
+# define SCALE 15
 
 /*
 ** Represent the identifier of the elements in the .cub file
@@ -176,8 +172,9 @@ typedef struct s_data
 	t_img			img;
 	t_img			tex_img[4];
 	t_vector_d		rays_coords[WIDTH+1];
-	int				test;
+	int				tex_to_draw;
 	int				**tex;
+	int				nb_xpm;
 	t_elements		*id_tab;
 	size_t			state;
 	size_t			present_id;
@@ -223,6 +220,8 @@ int		ft_exit_program(t_data *data, char *s);
 int		ft_split_len(char **split);
 void	ft_free_split(char **split);
 void	ft_replace_char(char *str, char find, char replace);
+int		max_of(int dx, int dy);
+void	ft_free_split_i(int	**split, t_data *data);
 
 		/* Games */
 void	run_game(t_data *data);
@@ -231,7 +230,7 @@ void	run_game(t_data *data);
 int		key_press(int keycode, t_data *data);
 int		key_release(int keycode, t_data *data);
 int		close_window(t_data *data);
-void	ft_destroy_mlx(t_data *data);
+void	ft_destroy_mlx(t_data *data, char *message);
 
 		/* Draw */
 int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);

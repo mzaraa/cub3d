@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:51:47 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/25 11:29:42 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/21 11:58:58 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	ft_exit_program(t_data *data, char *s)
 		free(data->map);
 	if (data->map_list)
 		ft_lstclear(&data->map_list, free);
+	ft_free_split_i(data->tex, data);
 	free(data);
 	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 12:40:23 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/19 17:23:57 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/21 11:49:28 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	key_release(int keycode, t_data *data)
 int	key_press(int keycode, t_data *data)
 {
 	if (keycode == KEY_ECHAP)
-		ft_destroy_mlx(data);
+		ft_destroy_mlx(data, "Exit program");
 	else
 		data->keys[keycode] = 1;
 	return (1);
@@ -29,13 +29,12 @@ int	key_press(int keycode, t_data *data)
 
 int	close_window(t_data *data)
 {
-	ft_destroy_mlx(data);
+	ft_destroy_mlx(data, "Exit program");
 	return (0);
 }
 
 void	key_manager_bis(t_data *data)
 {
-	// static double s = 0.00000001;
 	if (data->keys[KEY_D])
 	{
 		rotate_vector(&data->player.dir, data->player.rot_speed / 20);
@@ -46,7 +45,6 @@ void	key_manager_bis(t_data *data)
 		rotate_vector(&data->player.dir, -data->player.rot_speed / 20);
 		rotate_vector(&data->player.plane, -data->player.rot_speed / 20);
 	}
-	// s+=0.0000001;
 }
 
 void	key_manager(t_data *data)
