@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:52:19 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/27 16:51:32 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/21 17:57:37 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Parse the texture path of the identifier, it check if it's an .xpm file and
 ** if the path is valid
 */
-char	*parse_tex(t_data *data, char *line)
+char	*parse_tex(t_data *data, char *line, char **split)
 {
 	char	*temp;
 	char	**texture_path;
@@ -31,6 +31,7 @@ char	*parse_tex(t_data *data, char *line)
 		ft_strlen(*texture_path) <= 4)
 	{
 		ft_free_split(texture_path);
+		ft_free_split(split);
 		free(line);
 		ft_exit_program(data, "Error\nTexture path invalid => \
 Standart: ID ./path_to_the_north_texture.xpm");

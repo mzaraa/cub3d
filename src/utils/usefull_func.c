@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:06:48 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/21 11:58:34 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/21 17:53:56 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	ft_free_split_i(int	**split, t_data *data)
 {
 	if (split == NULL)
 		return ;
-	while (data->nb_xpm)
-		free(split[data->nb_xpm--]);
+	while (data->nb_xpm--)
+		free(split[data->nb_xpm]);
 	free(split);
 }
 

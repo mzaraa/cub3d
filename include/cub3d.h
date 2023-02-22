@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:43:51 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/21 12:26:53 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/21 17:57:58 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,9 +204,9 @@ int		check_file_name(char *file_name);
 void	parser(t_data *data, char *file_name);
 int		parse_identifier(t_data *data, int fd);
 void	check_line(t_data *data, char *trimed);
-void	check_double(t_data *data, size_t id, char *line);
-int		*parse_rgb(t_data *data, char *line);
-char	*parse_tex(t_data *data, char *line);
+void	check_double(t_data *data, size_t id, char *line, char **split);
+int		*parse_rgb(t_data *data, char *line, char **split);
+char	*parse_tex(t_data *data, char *line, char **split);
 void	error_empty_line(t_data *data, char *line);
 
 		/* Parse map */

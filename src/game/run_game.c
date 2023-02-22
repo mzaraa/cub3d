@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:06:54 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/21 11:57:08 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/21 15:25:17 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,28 @@ void	ft_destroy_mlx(t_data *data, char *message)
 void	init_xpm(t_data *data)
 {
 	t_img	*img;
-	int		*i;
+	int		i;
 	int		j;
 
-	i = &data->nb_xpm;
-	while (*i < 4)
+	i = 0;
+	while (i < 4)
 	{
 		j = -1;
-		img = &data->tex_img[*i];
+		img = &data->tex_img[i];
 		img->mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, \
-			data->id_tab[*i].info_tex, &img->width, &img->height);
+			data->id_tab[i].info_tex, &img->width, &img->height);
 		if (!img->mlx_img)
 			ft_destroy_mlx(data, "Error\nmlx_xpm_file_to_image() failed");
 		img->addr = mlx_get_data_addr(img->mlx_img, &img->bpp, \
 			&img->line_length, &img->endian);
 		if (!img->addr)
 			ft_destroy_mlx(data, "Error\nmlx_get_data_addr() failed");
-		data->tex[*i] = malloc(sizeof(int) * img->width * img->height);
+		data->tex[i] = malloc(sizeof(int) * img->width * img->height);
 		while (++j < img->width * img->height)
-			data->tex[*i][j] = ((int *)img->addr)[j];
+			data->tex[i][j] = ((int *)img->addr)[j];
 		mlx_destroy_image(data->mlx_ptr, img->mlx_img);
-		*i += 1;
+		i++;
+		data->nb_xpm++;
 	}
 }
 

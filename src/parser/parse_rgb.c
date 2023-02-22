@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:11:39 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/27 13:44:29 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/21 17:58:36 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	check_comma(char *s)
 **	into an array of strings. Check if the array size is 3 or more and if the 
 **	values are digits. If not, free the array and the line and exit the program.
 */
-int	*parse_rgb(t_data *data, char *line)
+int	*parse_rgb(t_data *data, char *line, char **split)
 {
 	char	**rgb;
 	char	**rgb_int;
@@ -81,6 +81,7 @@ int	*parse_rgb(t_data *data, char *line)
 	if (data->flag_error || check_rgb_value(rgb[1]) || check_comma(rgb[1]))
 	{
 		ft_free_split(rgb);
+		ft_free_split(split);
 		free(line);
 		ft_exit_program(data, "Error\nInvalid rgb value => Standart: ID R,G,B");
 	}

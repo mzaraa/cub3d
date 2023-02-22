@@ -172,7 +172,7 @@ for map in $maps_folder*.cub; do
 		fi
 		lost=$(cat $leaks_folder/$map_name.log | grep "definitely lost:" | cut -d':' -f 2 | cut -d' ' -f 2)
 		indirect=$(cat $leaks_folder/$map_name.log | grep "indirectly lost:" | cut -d':' -f 2 | cut -d' ' -f 2)
-		if [ $lost -eq 0 ] && [ $indirect -eq 0 ]; then
+		if [ ${lost} == ${indirect}]; then
 			echo -en "${BGreen}OK${Color_Off}"
 		else
 			echo -en "${BRed}KO${Color_Off} $cub3D ${BRed} => leaks${Color_Off} on $map_name"

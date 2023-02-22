@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:24:53 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/27 16:43:05 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/21 17:56:41 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	check_line(t_data *data, char *trimed)
 	{
 		if (ft_strcmp(split[0], tab[i]) == 0)
 		{
-			check_double(data, i, trimed);
+			check_double(data, i, trimed, split);
 			data->id_tab[i].id = ft_strdup(tab[i]);
 			if (i == F || i == C)
-				data->id_tab[i].info_rgb = parse_rgb(data, trimed);
+				data->id_tab[i].info_rgb = parse_rgb(data, trimed, split);
 			else
-				data->id_tab[i].info_tex = parse_tex(data, trimed);
+				data->id_tab[i].info_tex = parse_tex(data, trimed, split);
 			ft_free_split(split);
 			return ;
 		}
