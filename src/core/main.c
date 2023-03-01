@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:43:36 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/21 12:00:32 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/22 16:07:43 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_player(t_data *data)
 {
 	set_vector_d(&data->player.pos, data->ppx + 0.5, \
 		data->ppy + 0.5);
-	data->player.move_speed = 0.008;
+	data->player.move_speed = 0.08;
 	data->player.rot_speed = 0.07;
 	if (data->player_dir == 'N')
 		set_vector_d(&data->player.dir, 0, -1);

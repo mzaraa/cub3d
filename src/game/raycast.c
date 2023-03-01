@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:04:40 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/21 11:52:53 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/03/01 13:34:42 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	raycast(t_data *data)
 		set_vector_i(&data->ray.step, 0, 0);
 		set_vector_i(&data->ray.map, 0, 0);
 		data->ray.side = 0;
-		data->ray.camera_x = 2 * data->ray.x / (double)data->window_width - 1; 
+		data->ray.camera_x = 2 * data->ray.x / (double)data->window_width - 1;
 		set_vector_d(&data->ray.ray_dir, \
 			data->player.dir.x + data->player.plane.x * data->ray.camera_x, \
 				data->player.dir.y + data->player.plane.y * data->ray.camera_x);
@@ -98,9 +98,11 @@ void	raycast(t_data *data)
 			data->ray.pwd = (data->ray.side_dist.x - data->ray.delta.x);
 		else
 			data->ray.pwd = (data->ray.side_dist.y - data->ray.delta.y);
-		data->rays_coords[data->ray.x].x = data->player.pos.x + data->ray.pwd * data->ray.ray_dir.x;
-		data->rays_coords[data->ray.x].y = data->player.pos.y + data->ray.pwd * data->ray.ray_dir.y;
 		draw_wall(data);
 		data->ray.x++;
 	}
 }
+/* 		data->rays_coords[data->ray.x].x = 
+data->player.pos.x + data->ray.pwd * data->ray.ray_dir.x;
+		data->rays_coords[data->ray.x].y = 
+		data->player.pos.y + data->ray.pwd * data->ray.ray_dir.y; */

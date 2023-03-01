@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:43:51 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/21 17:57:58 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/03/01 13:38:13 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "colors.h"
 # include "keycode.h"
 # include <stdint.h>
-# include <mlx.h>
+# include "/usr/local/include/mlx.h"
 
 # define WHITESPACE " \t\n\v\f\r"
 # define WIDTH 1280
@@ -95,7 +95,7 @@ typedef struct s_ray
 	t_vector_i	map;
 	t_vector_i	step;
 	double		camera_x;
-	double		pwd; //perpendicular wall distance
+	double		pwd;
 	int			hit;
 	int			side;
 	int			x;
@@ -171,7 +171,7 @@ typedef struct s_data
 	void			*win_ptr;
 	t_img			img;
 	t_img			tex_img[4];
-	t_vector_d		rays_coords[WIDTH+1];
+	t_vector_d		rays_coords[WIDTH + 1];
 	int				tex_to_draw;
 	int				**tex;
 	int				nb_xpm;
@@ -188,8 +188,8 @@ typedef struct s_data
 	int				flag_map_start;
 	int				map_width;
 	int				map_height;
-	int				ppx; //player position x
-	int				ppy; //player position y
+	int				ppx;
+	int				ppy;
 	int				player_dir;
 	double			window_width;
 	double			window_height;

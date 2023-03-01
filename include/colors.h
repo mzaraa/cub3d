@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 10:56:59 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/01/16 11:05:01 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/03/01 13:38:32 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # define KMAG  "\x1B[35m"
 # define KCYN  "\x1B[36m"
 # define KWHT  "\x1B[37m"
-
 
 # define RED_PIXEL 0xFF0000
 # define GREEN_PIXEL 0xFF00

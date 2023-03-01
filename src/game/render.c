@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:05:38 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/19 17:00:59 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/03/01 13:30:46 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	render(t_data *data)
 	render_rectangle(&data->img, (t_rect){0, 0, WIDTH, HEIGHT / 2, \
 		encode_rgb(r, g, b)});
 	raycast(data);
-	minimap(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, \
 		0);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:06:54 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/21 15:25:17 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/02/22 17:27:27 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	ft_destroy_mlx(t_data *data, char *message)
 {
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	data->win_ptr = NULL;
 	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
-	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
 	ft_exit_program(data, message);
 }

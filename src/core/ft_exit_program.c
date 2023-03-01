@@ -6,11 +6,25 @@
 /*   By: mzaraa <mzaraa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:51:47 by mzaraa            #+#    #+#             */
-/*   Updated: 2023/02/21 11:58:58 by mzaraa           ###   ########.fr       */
+/*   Updated: 2023/03/01 13:39:03 by mzaraa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	ft_exit_sec(t_data *data)
+{
+	if (data->line_gnl)
+		free(data->line_gnl);
+	if (data->map)
+		free(data->map);
+	if (data->map_list)
+		ft_lstclear(&data->map_list, free);
+	if (data->tex)
+		ft_free_split_i(data->tex, data);
+	free(data);
+	exit(1);
+}
 
 int	ft_exit_program(t_data *data, char *s)
 {
@@ -31,13 +45,6 @@ int	ft_exit_program(t_data *data, char *s)
 		free(data->id_tab);
 		data->id_tab = NULL;
 	}
-	if (data->line_gnl)
-		free(data->line_gnl);
-	if (data->map)
-		free(data->map);
-	if (data->map_list)
-		ft_lstclear(&data->map_list, free);
-	ft_free_split_i(data->tex, data);
-	free(data);
+	ft_exit_sec(data);
 	exit(1);
 }

@@ -1,0 +1,13 @@
+
+NO ./grey_cub.xpm
+SO ./xpm/bluestone.xpm
+EA ./xpm/colorstone.xpm
+WE ./xpm/redbrick.xpm
+
+C 0,192,254
+F 70,37,7
+
+11111
+10001
+1N11
+ 1
